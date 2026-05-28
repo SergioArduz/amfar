@@ -27,7 +27,6 @@ public class PersonaConfiguration : IEntityTypeConfiguration<Persona>
 
         entity.Property(p => p.Telefono)
             .HasColumnName("telefono")
-            .HasMaxLength(20)
-            .IsRequired();
+            .HasMaxLength(20);
     }
 }
