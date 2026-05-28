@@ -1,6 +1,7 @@
 using AmfarAPI.Data;
 using AmfarAPI.Data.Repositories;
 using AmfarAPI.Interfaces;
+using AmfarAPI.Repositories;
 using AmfarAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<PersonaRepository>();
 
 builder.Services.AddScoped<IPersonaService, PersonaService>();
+
+builder.Services.AddScoped<IInstrumentoRepository, InstrumentoRepository>();
+builder.Services.AddScoped<IProfesorRepository, ProfesorRepository>();
+builder.Services.AddScoped<IPrestamoRepository, PrestamoRepository>();
+
+builder.Services.AddScoped<IInstrumentoService, InstrumentoService>();
+builder.Services.AddScoped<IProfesorService, ProfesorService>();
+builder.Services.AddScoped<IPrestamoService, PrestamoService>();
 
 
 // ========================================
@@ -57,7 +66,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-
     app.UseSwaggerUI();
 }
 
@@ -73,4 +81,3 @@ app.MapControllers();
 // ========================================
 
 app.Run();
-
