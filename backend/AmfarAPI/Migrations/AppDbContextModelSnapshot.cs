@@ -127,6 +127,7 @@ namespace AmfarAPI.Migrations
                     b.ToTable("persona", (string)null);
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("AmfarAPI.Models.PrestamoInstrumento", b =>
                 {
                     b.Property<int>("IdPrestamo")
@@ -195,11 +196,33 @@ namespace AmfarAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("fecha_registro")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
+=======
+            modelBuilder.Entity("AmfarAPI.Models.Usuario", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_usuario");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdUsuario"));
+
+                    b.Property<string>("ContrasenaHash")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("contrasena");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("email");
+>>>>>>> SVACreacionUsuarios
 
                     b.Property<int>("IdPersona")
                         .HasColumnType("integer")
                         .HasColumnName("id_persona");
 
+<<<<<<< HEAD
                     b.HasKey("IdProfesor");
 
                     b.HasIndex("IdPersona");
@@ -238,15 +261,37 @@ namespace AmfarAPI.Migrations
                 });
 
             modelBuilder.Entity("AmfarAPI.Models.Profesor", b =>
+=======
+                    b.Property<int>("Rol")
+                        .HasColumnType("integer")
+                        .HasColumnName("rol");
+
+                    b.HasKey("IdUsuario");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("IdPersona");
+
+                    b.ToTable("usuario", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Usuario", b =>
+>>>>>>> SVACreacionUsuarios
                 {
                     b.HasOne("AmfarAPI.Models.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("IdPersona")
+<<<<<<< HEAD
                         .OnDelete(DeleteBehavior.Restrict)
+=======
+                        .OnDelete(DeleteBehavior.Cascade)
+>>>>>>> SVACreacionUsuarios
                         .IsRequired();
 
                     b.Navigation("Persona");
                 });
+<<<<<<< HEAD
 
             modelBuilder.Entity("AmfarAPI.Models.Instrumento", b =>
                 {
@@ -259,6 +304,8 @@ namespace AmfarAPI.Migrations
                 {
                     b.Navigation("Especialidades");
                 });
+=======
+>>>>>>> SVACreacionUsuarios
 #pragma warning restore 612, 618
         }
     }

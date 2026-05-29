@@ -4,6 +4,9 @@ using AmfarAPI.Interfaces;
 using AmfarAPI.Repositories;
 using AmfarAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +26,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // DEPENDENCY INJECTION
 // ========================================
 
+//Persona
 builder.Services.AddScoped<PersonaRepository>();
 
 builder.Services.AddScoped<IPersonaService, PersonaService>();
@@ -34,6 +38,13 @@ builder.Services.AddScoped<IPrestamoRepository, PrestamoRepository>();
 builder.Services.AddScoped<IInstrumentoService, InstrumentoService>();
 builder.Services.AddScoped<IProfesorService, ProfesorService>();
 builder.Services.AddScoped<IPrestamoService, PrestamoService>();
+//Usuario
+builder.Services.AddScoped<UsuarioRepository>();
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+//Auth
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 // ========================================
@@ -41,6 +52,41 @@ builder.Services.AddScoped<IPrestamoService, PrestamoService>();
 // ========================================
 
 builder.Services.AddControllers();
+
+// ========================================
+// JWT AUTHENTICATION
+// ========================================
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var jwtSettings =
+            builder.Configuration.GetSection("Jwt");
+
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+
+                ValidateAudience = true,
+
+                ValidateLifetime = true,
+
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = jwtSettings["Issuer"],
+
+                ValidAudience = jwtSettings["Audience"],
+
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(
+                            jwtSettings["Key"]!
+                        )
+                    )
+            };
+    });
 
 
 // ========================================
@@ -70,6 +116,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
