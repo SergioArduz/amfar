@@ -17,6 +17,13 @@ public class AppDbContext : DbContext
     public DbSet<PrestamoInstrumento> PrestamosInstrumentos { get; set; }
 
     public DbSet<Usuario> Usuarios { get; set; }
+
+    public DbSet<Tutor> Tutores { get; set; }
+
+    public DbSet<Estudiante> Estudiantes { get; set; }
+
+    public DbSet<EstudianteTutor> EstudiantesTutores { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

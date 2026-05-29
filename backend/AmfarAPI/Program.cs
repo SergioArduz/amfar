@@ -46,6 +46,10 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 //Auth
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Tutor
+builder.Services.AddScoped<TutorRepository>();
+
+builder.Services.AddScoped<ITutorService, TutorService>();
 
 // ========================================
 // CONTROLLERS
