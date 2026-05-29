@@ -7,17 +7,9 @@ public class Estudiante
     public bool TieneInstrumento { get; set; }
 
 
-    // ========================================
     // RELACION
-    // ========================================
-
     public Persona Persona { get; set; } = null!;
 
-
-    // ========================================
-    // N:M
-    // ========================================
-
     public ICollection<EstudianteTutor> EstudiantesTutores
-        { get; set; } = new List<EstudianteTutor>();
+        = new List<EstudianteTutor>();
 }

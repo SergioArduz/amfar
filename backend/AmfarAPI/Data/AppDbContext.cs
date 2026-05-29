@@ -18,10 +18,13 @@ public class AppDbContext : DbContext
 
     public DbSet<Usuario> Usuarios { get; set; }
 
+//Tutor
     public DbSet<Tutor> Tutores { get; set; }
 
+//Estudiante
     public DbSet<Estudiante> Estudiantes { get; set; }
 
+//EstudianteTutor
     public DbSet<EstudianteTutor> EstudiantesTutores { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -10,7 +10,6 @@ public class TutorConfiguration : IEntityTypeConfiguration<Tutor>
     {
         entity.ToTable("tutor");
 
-        // PRIMARY KEY
         entity.HasKey(t => t.IdPersona);
 
         entity.Property(t => t.IdPersona)
@@ -18,11 +17,16 @@ public class TutorConfiguration : IEntityTypeConfiguration<Tutor>
 
         entity.Property(t => t.Parentesco)
             .HasColumnName("parentesco")
-            .HasMaxLength(50);
+            .HasMaxLength(50)
+            .IsRequired();
 
-        // RELACION 1 A 1
+
+        // ========================================
+        // RELACION 1:1 CON PERSONA
+        // ========================================
+
         entity.HasOne(t => t.Persona)
-            .WithOne(p => p.Tutor)
+            .WithOne()
             .HasForeignKey<Tutor>(t => t.IdPersona)
             .OnDelete(DeleteBehavior.Cascade);
     }

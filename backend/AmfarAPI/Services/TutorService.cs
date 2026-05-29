@@ -21,9 +21,13 @@ public class TutorService : ITutorService
         return tutores.Select(t => new TutorDto
         {
             IdPersona = t.IdPersona,
+
             Nombre = t.Persona.Nombre,
+
             Apellido = t.Persona.Apellido,
+
             Telefono = t.Persona.Telefono,
+
             Parentesco = t.Parentesco
         });
     }
@@ -38,9 +42,13 @@ public class TutorService : ITutorService
         return new TutorDto
         {
             IdPersona = tutor.IdPersona,
+
             Nombre = tutor.Persona.Nombre,
+
             Apellido = tutor.Persona.Apellido,
+
             Telefono = tutor.Persona.Telefono,
+
             Parentesco = tutor.Parentesco
         };
     }
@@ -49,7 +57,13 @@ public class TutorService : ITutorService
     {
         var tutor = new Tutor
         {
-            IdPersona = dto.IdPersona,
+            Persona = new Persona
+            {
+                Nombre = dto.Nombre,
+                Apellido = dto.Apellido,
+                Telefono = dto.Telefono
+            },
+
             Parentesco = dto.Parentesco
         };
 
@@ -62,6 +76,12 @@ public class TutorService : ITutorService
 
         if (tutor == null)
             throw new Exception("Tutor no encontrado");
+
+        tutor.Persona.Nombre = dto.Nombre;
+
+        tutor.Persona.Apellido = dto.Apellido;
+
+        tutor.Persona.Telefono = dto.Telefono;
 
         tutor.Parentesco = dto.Parentesco;
 

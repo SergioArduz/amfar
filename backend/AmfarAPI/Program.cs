@@ -51,6 +51,13 @@ builder.Services.AddScoped<TutorRepository>();
 
 builder.Services.AddScoped<ITutorService, TutorService>();
 
+//Estudiante
+builder.Services.AddScoped<EstudianteRepository>();
+
+builder.Services.AddScoped<
+    IEstudianteService,
+    EstudianteService
+>();
 // ========================================
 // CONTROLLERS
 // ========================================

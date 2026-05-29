@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AmfarAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260528150800_MigracionInicialProfesoresInstrumentosPrestamos")]
-    partial class MigracionInicialProfesoresInstrumentosPrestamos
+    [Migration("20260529124139_AddTutorEstudiante")]
+    partial class AddTutorEstudiante
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,38 @@ namespace AmfarAPI.Migrations
                     b.HasIndex("IdInstrumento");
 
                     b.ToTable("especialidad_profesor", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Estudiante", b =>
+                {
+                    b.Property<int>("IdPersona")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_persona");
+
+                    b.Property<bool>("TieneInstrumento")
+                        .HasColumnType("boolean")
+                        .HasColumnName("tiene_instrumento");
+
+                    b.HasKey("IdPersona");
+
+                    b.ToTable("estudiante", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.EstudianteTutor", b =>
+                {
+                    b.Property<int>("IdEstudiante")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_estudiante");
+
+                    b.Property<int>("IdTutor")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_tutor");
+
+                    b.HasKey("IdEstudiante", "IdTutor");
+
+                    b.HasIndex("IdTutor");
+
+                    b.ToTable("estudiante_tutor", (string)null);
                 });
 
             modelBuilder.Entity("AmfarAPI.Models.Instrumento", b =>
@@ -113,11 +145,17 @@ namespace AmfarAPI.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("apellido");
 
+                    b.Property<int?>("EstudianteIdPersona")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("nombre");
+
+                    b.Property<int?>("ProfesorIdProfesor")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
@@ -125,7 +163,21 @@ namespace AmfarAPI.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("telefono");
 
+                    b.Property<int?>("TutorIdPersona")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UsuarioIdUsuario")
+                        .HasColumnType("integer");
+
                     b.HasKey("IdPersona");
+
+                    b.HasIndex("EstudianteIdPersona");
+
+                    b.HasIndex("ProfesorIdProfesor");
+
+                    b.HasIndex("TutorIdPersona");
+
+                    b.HasIndex("UsuarioIdUsuario");
 
                     b.ToTable("persona", (string)null);
                 });
@@ -210,6 +262,61 @@ namespace AmfarAPI.Migrations
                     b.ToTable("profesor", (string)null);
                 });
 
+            modelBuilder.Entity("AmfarAPI.Models.Tutor", b =>
+                {
+                    b.Property<int>("IdPersona")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_persona");
+
+                    b.Property<string>("Parentesco")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("parentesco");
+
+                    b.HasKey("IdPersona");
+
+                    b.ToTable("tutor", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Usuario", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_usuario");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdUsuario"));
+
+                    b.Property<string>("ContrasenaHash")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("contrasena");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("email");
+
+                    b.Property<int>("IdPersona")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_persona");
+
+                    b.Property<int>("Rol")
+                        .HasColumnType("integer")
+                        .HasColumnName("rol");
+
+                    b.HasKey("IdUsuario");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("IdPersona");
+
+                    b.ToTable("usuario", (string)null);
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.EspecialidadProfesor", b =>
                 {
                     b.HasOne("AmfarAPI.Models.Instrumento", "Instrumento")
@@ -227,6 +334,63 @@ namespace AmfarAPI.Migrations
                     b.Navigation("Instrumento");
 
                     b.Navigation("Profesor");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Estudiante", b =>
+                {
+                    b.HasOne("AmfarAPI.Models.Persona", "Persona")
+                        .WithOne()
+                        .HasForeignKey("AmfarAPI.Models.Estudiante", "IdPersona")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.EstudianteTutor", b =>
+                {
+                    b.HasOne("AmfarAPI.Models.Estudiante", "Estudiante")
+                        .WithMany("EstudiantesTutores")
+                        .HasForeignKey("IdEstudiante")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AmfarAPI.Models.Tutor", "Tutor")
+                        .WithMany("EstudiantesTutores")
+                        .HasForeignKey("IdTutor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estudiante");
+
+                    b.Navigation("Tutor");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Persona", b =>
+                {
+                    b.HasOne("AmfarAPI.Models.Estudiante", "Estudiante")
+                        .WithMany()
+                        .HasForeignKey("EstudianteIdPersona");
+
+                    b.HasOne("AmfarAPI.Models.Profesor", "Profesor")
+                        .WithMany()
+                        .HasForeignKey("ProfesorIdProfesor");
+
+                    b.HasOne("AmfarAPI.Models.Tutor", "Tutor")
+                        .WithMany()
+                        .HasForeignKey("TutorIdPersona");
+
+                    b.HasOne("AmfarAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioIdUsuario");
+
+                    b.Navigation("Estudiante");
+
+                    b.Navigation("Profesor");
+
+                    b.Navigation("Tutor");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("AmfarAPI.Models.PrestamoInstrumento", b =>
@@ -251,6 +415,33 @@ namespace AmfarAPI.Migrations
                     b.Navigation("Persona");
                 });
 
+            modelBuilder.Entity("AmfarAPI.Models.Tutor", b =>
+                {
+                    b.HasOne("AmfarAPI.Models.Persona", "Persona")
+                        .WithOne()
+                        .HasForeignKey("AmfarAPI.Models.Tutor", "IdPersona")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Usuario", b =>
+                {
+                    b.HasOne("AmfarAPI.Models.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("IdPersona")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Estudiante", b =>
+                {
+                    b.Navigation("EstudiantesTutores");
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.Instrumento", b =>
                 {
                     b.Navigation("EspecialidadProfesores");
@@ -261,6 +452,11 @@ namespace AmfarAPI.Migrations
             modelBuilder.Entity("AmfarAPI.Models.Profesor", b =>
                 {
                     b.Navigation("Especialidades");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Tutor", b =>
+                {
+                    b.Navigation("EstudiantesTutores");
                 });
 #pragma warning restore 612, 618
         }
