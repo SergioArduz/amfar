@@ -27,6 +27,13 @@ public class AppDbContext : DbContext
 //EstudianteTutor
     public DbSet<EstudianteTutor> EstudiantesTutores { get; set; }
 
+    public DbSet<Plan> Planes { get; set; } = default!;
+    public DbSet<Descuento> Descuentos { get; set; } = default!;
+    public DbSet<Inscripcion> Inscripciones { get; set; } = default!;
+    public DbSet<InscripcionClase> InscripcionClases { get; set; } = default!;
+    public DbSet<AmfarAPI.Models.Pago> Pagos { get; set; } = default!;
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
