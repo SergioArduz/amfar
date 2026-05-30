@@ -156,7 +156,21 @@ public class EstudianteService : IEstudianteService
             dto.TieneInstrumento;
 
 
+        // ========================================
+        // GUARDAR CAMBIOS
+        // ========================================
+
         await _repository.UpdateAsync(estudiante);
+
+
+        // ========================================
+        // ACTUALIZAR TUTORES
+        // ========================================
+
+        await _repository.ActualizarTutoresAsync(
+            id,
+            dto.IdsTutores
+        );
     }
     public async Task AsignarTutorAsync(
         int idEstudiante,

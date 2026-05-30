@@ -26,7 +26,7 @@ public class TutorConfiguration : IEntityTypeConfiguration<Tutor>
         // ========================================
 
         entity.HasOne(t => t.Persona)
-            .WithOne()
+            .WithOne(p => p.Tutor)
             .HasForeignKey<Tutor>(t => t.IdPersona)
             .OnDelete(DeleteBehavior.Cascade);
     }

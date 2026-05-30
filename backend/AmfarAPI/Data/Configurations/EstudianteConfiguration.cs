@@ -29,7 +29,7 @@ public class EstudianteConfiguration : IEntityTypeConfiguration<Estudiante>
         // ========================================
 
         entity.HasOne(e => e.Persona)
-            .WithOne()
+            .WithOne(p => p.Estudiante)
             .HasForeignKey<Estudiante>(e => e.IdPersona)
             .OnDelete(DeleteBehavior.Cascade);
     }

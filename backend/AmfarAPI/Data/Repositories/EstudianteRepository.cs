@@ -88,4 +88,30 @@ public class EstudianteRepository
 
         await _context.SaveChangesAsync();
     }
+    public async Task ActualizarTutoresAsync(
+        int idEstudiante,
+        List<int>? idsTutores)
+    {
+        var relaciones =
+            await _context.EstudiantesTutores
+                .Where(et => et.IdEstudiante == idEstudiante)
+                .ToListAsync();
+
+        _context.EstudiantesTutores.RemoveRange(relaciones);
+
+        if (idsTutores != null)
+        {
+            foreach (var idTutor in idsTutores)
+            {
+                await _context.EstudiantesTutores.AddAsync(
+                    new EstudianteTutor
+                    {
+                        IdEstudiante = idEstudiante,
+                        IdTutor = idTutor
+                    });
+            }
+        }
+
+        await _context.SaveChangesAsync();
+    }
 }

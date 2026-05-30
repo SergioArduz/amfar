@@ -18,4 +18,11 @@ public class UpdateEstudianteDto
     // ========================================
 
     public bool TieneInstrumento { get; set; }
+
+
+    // ========================================
+    // TUTORES
+    // ========================================
+
+    public List<int>? IdsTutores { get; set; }
 }
