@@ -47,7 +47,7 @@ namespace AmfarAPI.Services
             {
                 Codigo = dto.Codigo,
                 CodigoInscripcion = dto.CodigoInscripcion,
-                FechaGeneracion = DateTime.Now,
+                FechaGeneracion = DateTime.UtcNow,
                 FechaVencimiento = dto.FechaVencimiento,
                 FechaPago = dto.FechaPago,
                 Monto = dto.Monto,
@@ -72,7 +72,7 @@ namespace AmfarAPI.Services
 
             if (estadoPago == "Pagado")
             {
-                pago.FechaPago = DateTime.Now;
+                pago.FechaPago = DateTime.UtcNow;
             }
 
             var actualizado = await _pagoRepository.Actualizar(pago);
