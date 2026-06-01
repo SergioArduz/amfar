@@ -1,145 +1,61 @@
 import {
-    BrowserRouter,
-    Routes,
-    Route,
-    Navigate,
-    Link
+  BrowserRouter,
+  Routes,
+  Route
 } from "react-router-dom";
 
 import Login from "./pages/Login";
+
+import Layout from "./components/Layout";
+
 import Estudiantes from "./pages/Estudiantes";
-import PrivateRoute from "./components/PrivateRoute";
-import CrearEstudiante from "./pages/CrearEstudiante";
-import EditarEstudiante from "./pages/EditarEstudiante";
-
 import Tutores from "./pages/Tutores";
-import CrearTutor from "./pages/CrearTutor";
-import EditarTutor from "./pages/EditarTutor";
+import Usuarios from "./pages/Usuarios";
 
-import PlanesPage from "./pages/PlanesPage";
-import InscripcionesPage from "./pages/InscripcionesPage";
-import PagosPage from "./pages/PagosPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-    return (
-        <BrowserRouter>
+  return (
+    <BrowserRouter>
 
-            <div className="page-container">
-                <nav className="card">
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "20px",
-                            alignItems: "center",
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        <Link to="/planes">Planes</Link>
-                        <Link to="/inscripciones">Inscripciones</Link>
-                        <Link to="/pagos">Pagos</Link>
-                        <Link to="/estudiantes">Estudiantes</Link>
-                        <Link to="/tutores">Tutores</Link>
-                    </div>
-                </nav>
-            </div>
+      <Routes>
 
-            <Routes>
+        {/* LOGIN */}
+        <Route
+          path="/"
+          element={<Login />}
+        />
 
-                <Route
-                    path="/"
-                    element={<Login />}
-                />
+        {/* SISTEMA */}
+        <Route
+          element={
+            <PrivateRoute>
+              <Layout />
+            </PrivateRoute>
+          }
+        >
 
-                <Route
-                    path="/estudiantes"
-                    element={
-                        <PrivateRoute>
-                            <Estudiantes />
-                        </PrivateRoute>
-                    }
-                />
+          <Route
+            path="/estudiantes"
+            element={<Estudiantes />}
+          />
 
-                <Route
-                    path="/estudiantes/nuevo"
-                    element={
-                        <PrivateRoute>
-                            <CrearEstudiante />
-                        </PrivateRoute>
-                    }
-                />
+          <Route
+            path="/tutores"
+            element={<Tutores />}
+          />
 
-                <Route
-                    path="/estudiantes/editar/:id"
-                    element={
-                        <PrivateRoute>
-                            <EditarEstudiante />
-                        </PrivateRoute>
-                    }
-                />
+          <Route
+            path="/usuarios"
+            element={<Usuarios />}
+          />
 
-                <Route
-                    path="/tutores"
-                    element={
-                        <PrivateRoute>
-                            <Tutores />
-                        </PrivateRoute>
-                    }
-                />
+        </Route>
 
-                <Route
-                    path="/tutores/nuevo"
-                    element={
-                        <PrivateRoute>
-                            <CrearTutor />
-                        </PrivateRoute>
-                    }
-                />
+      </Routes>
 
-                <Route
-                    path="/tutores/editar/:id"
-                    element={
-                        <PrivateRoute>
-                            <EditarTutor />
-                        </PrivateRoute>
-                    }
-                />
-
-                <Route
-                    path="/planes"
-                    element={
-                        <PrivateRoute>
-                            <PlanesPage />
-                        </PrivateRoute>
-                    }
-                />
-
-                <Route
-                    path="/inscripciones"
-                    element={
-                        <PrivateRoute>
-                            <InscripcionesPage />
-                        </PrivateRoute>
-                    }
-                />
-
-                <Route
-                    path="/pagos"
-                    element={
-                        <PrivateRoute>
-                            <PagosPage />
-                        </PrivateRoute>
-                    }
-                />
-
-                <Route
-                    path="*"
-                    element={<Navigate to="/" />}
-                />
-
-            </Routes>
-
-        </BrowserRouter>
-    );
+    </BrowserRouter>
+  );
 }
 
 export default App;
