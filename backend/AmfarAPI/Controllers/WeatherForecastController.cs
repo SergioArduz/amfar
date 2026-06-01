@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+/*using Microsoft.AspNetCore.Mvc;
 
 namespace AmfarAPI.Controllers
 {
@@ -31,3 +31,4 @@ namespace AmfarAPI.Controllers
         }
     }
 }
+*/

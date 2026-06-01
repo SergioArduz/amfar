@@ -7,9 +7,9 @@ namespace AmfarAPI.Repositories
 {
     public class InscripcionRepository : IInscripcionRepository
     {
-        private readonly AmfarAPIContext _context;
+        private readonly AppDbContext _context;
 
-        public InscripcionRepository(AmfarAPIContext context)
+        public InscripcionRepository(AppDbContext context)
         {
             _context = context;
         }
