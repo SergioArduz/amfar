@@ -8,9 +8,9 @@ namespace AmfarAPI.Repositories
 {
     public class DescuentoRepository : IDescuentoRepository
     {
-        private readonly AmfarAPIContext _context;
+        private readonly AppDbContext _context;
 
-        public DescuentoRepository(AmfarAPIContext context)
+        public DescuentoRepository(AppDbContext context)
         {
             _context = context;
         }

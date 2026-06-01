@@ -58,6 +58,23 @@ builder.Services.AddScoped<
     IEstudianteService,
     EstudianteService
 >();
+
+// ========================================
+// CORS
+// ========================================
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactPolicy",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 // ========================================
 // CONTROLLERS
 // ========================================
@@ -127,6 +144,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("ReactPolicy");
 
 app.UseAuthentication();
 

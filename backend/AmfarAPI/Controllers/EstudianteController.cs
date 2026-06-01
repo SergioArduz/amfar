@@ -93,9 +93,6 @@ public class EstudianteController : ControllerBase
     // DELETE
     // ========================================
 
-    [Authorize(Roles =
-        "Administrador,Directora")]
-    [HttpDelete("{id}")]
 
     // ========================================
     // ASIGNAR TUTOR

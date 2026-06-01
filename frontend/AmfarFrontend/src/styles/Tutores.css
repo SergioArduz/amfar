@@ -1,0 +1,73 @@
+.tutores-container {
+  padding: 30px;
+  background: #F2F2F2;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: #111111;
+}
+
+.btn-crear {
+  background: #D9A441;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-crear:hover {
+  background: #E8C46A;
+}
+
+.input-busqueda {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #C9C9C9;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+thead {
+  background: #D9A441;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #C9C9C9;
+  text-align: left;
+}
+
+.btn-editar {
+  background: #E5D75A;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.btn-eliminar {
+  background: #111111;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+}

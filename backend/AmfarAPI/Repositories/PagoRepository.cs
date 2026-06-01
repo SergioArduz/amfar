@@ -7,9 +7,9 @@ namespace AmfarAPI.Repositories
 {
     public class PagoRepository : IPagoRepository
     {
-        private readonly AmfarAPIContext _context;
+        private readonly AppDbContext _context;
 
-        public PagoRepository(AmfarAPIContext context)
+        public PagoRepository(AppDbContext context)
         {
             _context = context;
         }

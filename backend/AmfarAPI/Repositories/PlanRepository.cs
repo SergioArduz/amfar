@@ -8,9 +8,9 @@ namespace AmfarAPI.Repositories
 {
     public class PlanRepository : IPlanRepository
     {
-        private readonly AmfarAPIContext _context;
+        private readonly AppDbContext _context;
 
-        public PlanRepository(AmfarAPIContext context)
+        public PlanRepository(AppDbContext context)
         {
             _context = context;
         }

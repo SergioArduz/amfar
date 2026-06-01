@@ -9,9 +9,9 @@ namespace AmfarAPI.Services
     public class InscripcionService
     {
         private readonly IInscripcionRepository _inscripcionRepository;
-        private readonly AmfarAPIContext _context;
+        private readonly AppDbContext _context;
 
-        public InscripcionService(IInscripcionRepository inscripcionRepository, AmfarAPIContext context)
+        public InscripcionService(IInscripcionRepository inscripcionRepository, AppDbContext context)
         {
             _inscripcionRepository = inscripcionRepository;
             _context = context;
