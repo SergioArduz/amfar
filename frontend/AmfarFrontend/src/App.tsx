@@ -6,13 +6,21 @@ import {
 
 import Login from "./pages/Login";
 
-import Layout from "./components/Layout";
-
 import Estudiantes from "./pages/Estudiantes";
 import Tutores from "./pages/Tutores";
 import Usuarios from "./pages/Usuarios";
 
+import CrearEstudiante from "./pages/CrearEstudiante";
+import EditarEstudiante from "./pages/EditarEstudiante";
+
+import CrearTutor from "./pages/CrearTutor";
+import EditarTutor from "./pages/EditarTutor";
+
+import CrearUsuario from "./pages/CrearUsuario";
+import EditarUsuario from "./pages/EditarUsuario";
+
 import PrivateRoute from "./components/PrivateRoute";
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -41,13 +49,43 @@ function App() {
           />
 
           <Route
+            path="/estudiantes/nuevo"
+            element={<CrearEstudiante />}
+          />
+
+          <Route
+            path="/estudiantes/editar/:id"
+            element={<EditarEstudiante />}
+          />
+
+          <Route
             path="/tutores"
             element={<Tutores />}
           />
 
           <Route
+            path="/tutores/nuevo"
+            element={<CrearTutor />}
+          />
+
+          <Route
+            path="/tutores/editar/:id"
+            element={<EditarTutor />}
+          />
+
+          <Route
             path="/usuarios"
             element={<Usuarios />}
+          />
+
+          <Route
+            path="/usuarios/nuevo"
+            element={<CrearUsuario />}
+          />
+
+          <Route
+            path="/usuarios/editar/:id"
+            element={<EditarUsuario />}
           />
 
         </Route>
