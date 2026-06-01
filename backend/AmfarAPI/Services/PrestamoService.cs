@@ -1,16 +1,20 @@
+using AmfarAPI.Data;
 using AmfarAPI.DTOs;
 using AmfarAPI.Models;
 using AmfarAPI.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace AmfarAPI.Services;
 
 public class PrestamoService : IPrestamoService
 {
+    private readonly AppDbContext _context;
     private readonly IPrestamoRepository _repo;
     private readonly IInstrumentoRepository _instrumentoRepo;
 
-    public PrestamoService(IPrestamoRepository repo, IInstrumentoRepository instrumentoRepo)
+    public PrestamoService(AppDbContext context, IPrestamoRepository repo, IInstrumentoRepository instrumentoRepo)
     {
+        _context = context;
         _repo = repo;
         _instrumentoRepo = instrumentoRepo;
     }
@@ -27,22 +31,36 @@ public class PrestamoService : IPrestamoService
                 throw new InvalidOperationException(
                     $"No hay stock disponible para '{instrumento.Nombre}'. " +
                     $"Disponibles: {instrumento.StockDisponible - prestamosActivos}");
-
-            instrumento.StockDisponible--;
-            await _instrumentoRepo.UpdateAsync(instrumento);
         }
 
-        var prestamo = new PrestamoInstrumento
-        {
-            IdInscripcion = request.IdInscripcion,
-            IdInstrumento = request.IdInstrumento,
-            EsPropio = request.EsPropio,
-            FechaInicio = request.FechaInicio,
-            Estado = "Activo"
-        };
+        using var transaction = await _context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
 
-        var creado = await _repo.CreateAsync(prestamo);
-        return MapToResponse(creado);
+        try
+        {
+            if (!request.EsPropio)
+            {
+                instrumento.StockDisponible--;
+                await _instrumentoRepo.UpdateAsync(instrumento);
+            }
+
+            var prestamo = new PrestamoInstrumento
+            {
+                IdInscripcion = request.IdInscripcion,
+                IdInstrumento = request.IdInstrumento,
+                EsPropio = request.EsPropio,
+                FechaInicio = request.FechaInicio,
+                Estado = "Activo"
+            };
+
+            var creado = await _repo.CreateAsync(prestamo);
+            await transaction.CommitAsync();
+            return MapToResponse(creado);
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task<PrestamoResponse?> DevolverAsync(int id, DevolucionRequest request)

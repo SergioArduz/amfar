@@ -1,0 +1,537 @@
+﻿Resumen,Clave de incidencia,ID de la incidencia,Tipo de Incidencia,Estado,Clave del proyecto,Nombre del proyecto,Tipo de proyecto,Responsable del proyecto,ID del responsable del proyecto,Descripción del proyecto,Prioridad,Resolución,Persona asignada,ID de la persona asignada,Informador,ID del informador,Creador,ID del creador,Creada,Actualizada,Vista por Última Vez,Resuelta,Fecha de vencimiento,Votos,Descripción,Entorno,Interesados,ID de los interesados,Estimación original,Trabajo restante estimado,Tiempo Trabajado,Relación de trabajo,Σ Estimación original,Σ Trabajo restante estimado,Σ Tiempo empleado,Nivel de Seguridad,Campo personalizado (Actual end),Campo personalizado (Actual start),Campo personalizado (Aprobaciones),Campo personalizado (Change reason),Campo personalizado (Change risk),Campo personalizado (Change type),Campo personalizado (Epic Color),Campo personalizado (Epic Name),Campo personalizado (Epic Status),Campo personalizado (Formularios abiertos),Campo personalizado (Formularios bloqueados),Campo personalizado (Formularios enviados),Campo personalizado (Impact),Campo personalizado (Issue color),Campo personalizado (Metas),Campo personalizado (Project overview key),Campo personalizado (Project overview status),Campo personalizado (Proyecto),Campo personalizado (Rank),Campo personalizado (Request Type),Campo personalizado (Sentiment),Campo personalizado (Start date),Campo personalizado (Story Points),Campo personalizado (Story point estimate),Campo personalizado (Target end),Campo personalizado (Target start),Campo personalizado (Team),Campo personalizado (Total de formularios),Campo personalizado (Vulnerability),Campo personalizado (Vulnerability),Campo personalizado ([CHART] Date of First Response),Campo personalizado ([CHART] Time in Status),Campo personalizado (development),Campo personalizado (Áreas de enfoque),Categoría de estado,Categoría de estado cambiada,Principal,Clave principal,Parent summary
+Frontend,AMFAR-42,10424,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:18 AM,26/may/26 10:18 AM,,,,0,"* Crear vista mis alumnos
+* Mostrar horarios
+* Mostrar instrumentos
+* Consumir endpoint
+* Bloquear módulos administrativos",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,3600,3600,,0 %,3600,3600,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@19fd7fb6,,,,,,,,,,,,,,,,0|i000zb:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:18 AM,10400,AMFAR-18,HU-12 Consulta de alumnos por profesor
+Backend,AMFAR-41,10423,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:18 AM,26/may/26 10:18 AM,,,,0,"* Crear endpoint alumnos por profesor
+* Filtrar por profesor autenticado
+* Retornar horarios e instrumentos",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,7200,7200,,0 %,7200,7200,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@106b7f22,,,,,,,,,,,,,,,,0|i000z3:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:18 AM,10400,AMFAR-18,HU-12 Consulta de alumnos por profesor
+Frontend,AMFAR-40,10422,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:17 AM,26/may/26 10:17 AM,,,,0,"* Crear calendario visual
+* Mostrar clases programadas
+* Implementar filtros
+* Mostrar detalle de clase
+* Optimizar carga visual",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@75517dc8,,,,,,,,,,,,,,,,0|i000yv:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:17 AM,10399,AMFAR-17,HU-11 Consulta de calendario académico
+Backend,AMFAR-39,10421,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:17 AM,26/may/26 10:18 AM,,,,0,"* Crear endpoint calendario
+* Implementar filtros:
+** profesor
+** alumno
+** instrumento
+** fecha
+* Optimizar consultas
+* Validar permisos",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,18000,18000,,0 %,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@749dba0,,,,,,,,,,,,,,,,0|i000yn:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:17 AM,10399,AMFAR-17,HU-11 Consulta de calendario académico
+Frontend,AMFAR-38,10420,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:16 AM,26/may/26 10:17 AM,,,,0,"* Crear vista recibo
+* Crear botón imprimir
+* Crear historial recibos
+* Mostrar datos completos
+* Descargar/imprimir PDF",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,7200,7200,,0 %,7200,7200,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@20e55821,,,,,,,,,,,,,,,,0|i000yf:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:16 AM,10398,AMFAR-16,HU-10 Generación e impresión de recibos
+Backend,AMFAR-37,10419,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:16 AM,26/may/26 10:16 AM,,,,0,"* Crear tabla RECIBO
+* Generar numeración secuencial
+* Generar datos del recibo
+* Relacionar pago-recibo
+* Permitir reimpresión
+* Generar PDF (opcional)",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@3b3c523b,,,,,,,,,,,,,,,,0|i000y7:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:16 AM,10398,AMFAR-16,HU-10 Generación e impresión de recibos
+Frontend,AMFAR-36,10418,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:15 AM,26/may/26 10:16 AM,,,,0,"* Crear módulo pagos
+* Mostrar estados de pago
+* Mostrar alertas
+* Modificar estado
+* Mostrar historial pagos",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@61885106,,,,,,,,,,,,,,,,0|i000xz:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:15 AM,10397,AMFAR-15,HU-09 Gestión automática de pagos
+Backend,AMFAR-35,10417,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:15 AM,26/may/26 10:15 AM,,,,0,"* Crear tabla pagos
+* Generar pago automático
+* Crear lógica de vencimientos
+* Generar pagos periódicos
+* Crear alertas internas
+* Actualizar estados de pago
+* Mantener historial",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,18000,18000,,0 %,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@6a4b2a38,,,,,,,,,,,,,,,,0|i000xr:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:15 AM,10397,AMFAR-15,HU-09 Gestión automática de pagos
+Frontend,AMFAR-34,10416,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:14 AM,26/may/26 10:15 AM,,,,0,"* Crear formulario inscripción
+* Seleccionar alumno
+* Seleccionar horarios flexibles
+* Seleccionar instrumento
+* Seleccionar profesor
+* Mostrar conflictos en tiempo real
+* Mostrar monto calculado
+* Mostrar disponibilidad",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,18000,18000,,0 %,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@71e9ea48,,,,,,,,,,,,,,,,0|i000xj:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:14 AM,10396,AMFAR-14,HU-08 Registro completo de inscripción académica
+Backend,AMFAR-33,10415,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:14 AM,26/may/26 10:15 AM,,,,0,"* Crear tabla INSCRIPCION
+* Crear tabla INSCRIPCION_CLASE
+* Crear endpoints inscripción
+* Implementar validación de conflictos
+* Validar profesor disponible
+* Validar instrumento disponible
+* Validar horarios permitidos
+* Calcular monto automáticamente
+* Generar clases automáticamente
+* Validar profesor activo",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,28800,28800,,0 %,28800,28800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@52d4c1ff,,,,,,,,,,,,,,,,0|i000xb:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:14 AM,10396,AMFAR-14,HU-08 Registro completo de inscripción académica
+Frontend,AMFAR-32,10414,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:13 AM,26/may/26 10:14 AM,,,,0,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,7200,7200,,0 %,7200,7200,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@38b2f97d,,,,,,,,,,,,,,,,0|i000x3:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:13 AM,10395,AMFAR-13,HU-07 Administración de planes académicos
+Backend,AMFAR-31,10413,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:13 AM,26/may/26 10:14 AM,,,,0,"* Crear tabla PLANES
+* Crear lógica descuentos
+* CRUD planes
+* CRUD descuentos
+* Validar permisos por rol
+* Validar estados activos",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@71efb110,,,,,,,,,,,,,,,,0|i000wv:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:13 AM,10395,AMFAR-13,HU-07 Administración de planes académicos
+Frontend,AMFAR-30,10412,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:12 AM,26/may/26 10:13 AM,,,,0,"* Mostrar disponibilidad en tiempo real
+* Mostrar conflictos
+* Mostrar opción instrumento propio
+* Consumir validaciones
+* Mostrar mensajes de bloqueo",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@74e676ec,,,,,,,,,,,,,,,,0|i000wn:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:12 AM,10394,AMFAR-12,HU-06 Préstamo automático de instrumentos
+Backend,AMFAR-29,10411,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:12 AM,26/may/26 10:13 AM,,,,0,"* Crear lógica de préstamo
+* Validar disponibilidad por horario
+* Validar conflictos
+* Registrar préstamo automático
+* Liberar instrumento automáticamente
+* Crear endpoints de validación",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,18000,18000,,0 %,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@6bdb8be,,,,,,,,,,,,,,,,0|i000wf:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:12 AM,10394,AMFAR-12,HU-06 Préstamo automático de instrumentos
+Frontend,AMFAR-28,10410,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:12 AM,26/may/26 10:12 AM,,,,0,"* Crear módulo instrumentos
+* Crear formulario instrumentos
+* Crear listado de instrumentos
+* Mostrar stock disponible
+* Mostrar disponibilidad",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,7200,7200,,0 %,7200,7200,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@3680f6bc,,,,,,,,,,,,,,,,0|i000w7:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:12 AM,10393,AMFAR-11,HU-05 Administración de instrumentos
+Backend,AMFAR-27,10409,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:12 AM,26/may/26 10:12 AM,,,,0,"* Crear tabla INSTRUMENTO
+* Crear CRUD instrumentos
+* Implementar control de stock
+* Crear endpoint disponibilidad
+* Validar estados de instrumentos",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@26138c46,,,,,,,,,,,,,,,,0|i000vz:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:12 AM,10393,AMFAR-11,HU-05 Administración de instrumentos
+Frontend,AMFAR-26,10408,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:11 AM,26/may/26 10:11 AM,,,,0,"* Crear módulo profesores
+* Crear formulario profesor
+* Crear listado de profesores
+* Crear edición de profesores
+* Mostrar especialidades
+* Implementar activación/desactivación",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,7200,7200,,0 %,7200,7200,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@3336f596,,,,,,,,,,,,,,,,0|i000vr:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:11 AM,10392,AMFAR-10,HU-04 Registro y administración de profesores
+Backend,AMFAR-25,10407,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:11 AM,26/may/26 10:11 AM,,,,0,"* Crear tabla PROFESOR
+* Crear CRUD profesores
+* Implementar especialidades
+* Validar profesores activos
+* Crear endpoints de consulta",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@36e8f2b5,,,,,,,,,,,,,,,,0|i000vj:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:11 AM,10392,AMFAR-10,HU-04 Registro y administración de profesores
+Frontend,AMFAR-24,10406,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:09 AM,26/may/26 10:11 AM,,,,0,"* Crear módulo alumnos
+* Crear formulario registro alumno
+* Crear formulario tutores
+* Implementar asociación tutor-alumno
+* Crear listado de alumnos
+* Crear búsqueda y filtros
+* Crear edición de alumno",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@36654da3,,,,,,,,,,,,,,,,0|i000vb:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:09 AM,10391,AMFAR-9,HU-03 Registro de alumnos y tutores
+Backend,AMFAR-23,10405,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:09 AM,26/may/26 10:10 AM,28/may/26 10:01 AM,,,0,"* Crear tablas:
+** PERSONA
+** ESTUDIANTE
+** TUTOR
+* Crear relación tutor-alumno
+* Crear endpoints CRUD alumnos
+* Crear endpoints CRUD tutores
+* Validar estados activos/inactivos
+* Implementar búsqueda de alumnos
+* Validar múltiples tutores",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,18000,18000,,0 %,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@43ea7198,,,,,,,,,,,,,,,,0|i000v3:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:09 AM,10391,AMFAR-9,HU-03 Registro de alumnos y tutores
+Frontend,AMFAR-22,10404,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:08 AM,26/may/26 10:08 AM,,,,0,"* Crear pantalla de usuarios
+* Crear tabla de usuarios
+* Crear formulario de registro
+* Crear formulario de edición
+* Agregar botón activar/desactivar
+* Mostrar roles disponibles
+* Consumir API de usuarios",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,7200,7200,,0 %,7200,7200,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@441a254f,,,,,,,,,,,,,,,,0|i000uv:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:08 AM,10390,AMFAR-8,HU-02 Administración de usuarios internos
+Backend,AMFAR-21,10403,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:08 AM,26/may/26 10:08 AM,,,,0,"* Crear CRUD de usuarios
+* Crear endpoints:
+** listar
+** crear
+** editar
+** activar/desactivar
+* Validar roles permitidos
+* Registrar auditoría de acciones
+* Validar duplicidad de email",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5e6b2381,,,,,,,,,,,,,,,,0|i000un:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:08 AM,10390,AMFAR-8,HU-02 Administración de usuarios internos
+Frontend,AMFAR-20,10402,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:06 AM,28/may/26 9:58 AM,,,,0,"* Crear pantalla Login
+* Crear formulario de autenticación
+* Consumir endpoint Login
+* Guardar JWT en localStorage/context
+* Redireccionar según rol
+* Crear Protected Routes
+* Implementar Logout
+* Mostrar mensajes de error
+* Manejar expiración de sesión",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,10800,10800,,0 %,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@726e4c7f,,,,,,,,,,,,,,,,0|i000rp:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:06 AM,10389,AMFAR-7,HU-01 Inicio de sesión seguro por roles
+Backend,AMFAR-19,10401,Subtarea,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 10:06 AM,28/may/26 9:58 AM,,,,0,"* Crear tabla {{USUARIO}}
+* Configurar Entity Framework / conexión PostgreSQL
+* Implementar hash de contraseñas con bcrypt
+* Implementar JWT Authentication
+* Crear endpoint Login
+* Crear middleware de autorización por roles
+* Configurar expiración de token
+* Crear endpoint Logout
+* Registrar logs de acceso
+* Validar usuarios activos/inactivos
+* Configurar HTTPS y seguridad básica",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,18000,18000,,0 %,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@648e53de,,,,,,,,,,,,,,,,0|i000rn:,,,,,,,,,,,,,,,,Por hacer,26/may/26 10:06 AM,10389,AMFAR-7,HU-01 Inicio de sesión seguro por roles
+HU-12 Consulta de alumnos por profesor,AMFAR-18,10400,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:01 AM,,,,0,"h3. Como
+
+Profesor
+
+h3. Quiero
+
+Ver el listado de mis alumnos y horarios asignados
+
+h3. Para
+
+Organizar correctamente mis clases.
+
+h3. Criterios de aceptación
+
+* El profesor solo puede ver sus propios alumnos.
+* Debe visualizar horario e instrumento.
+* No debe tener acceso a pagos ni administración.
+
+h3. Flujo principal
+
+# El profesor inicia sesión.
+# Accede a su listado de alumnos.
+# El sistema muestra horarios e instrumentos asignados.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,10800,10800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@7dc00e6,,,,,,,,,,,,,,,,0|i000tz:,,,,3.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10356,AMFAR-6,Calendario y consultas de clases
+HU-11 Consulta de calendario académico,AMFAR-17,10399,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:02 AM,,,,0,"h3. Como
+
+Usuario del sistema
+
+h3. Quiero
+
+Visualizar las clases programadas en un calendario
+
+h3. Para
+
+Consultar horarios y organización académica.
+
+h3. Criterios de aceptación
+
+* El sistema debe mostrar clases por día.
+* Debe permitir filtros.
+* Debe cargar rápidamente la información.
+* Debe funcionar para todos los roles autorizados.
+
+h3. Flujo principal
+
+# El usuario abre el calendario.
+# Selecciona filtros.
+# El sistema muestra las clases correspondientes.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,28800,28800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@79085674,,,,,,,,,,,,,,,,0|i000tr:,,,,8.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10356,AMFAR-6,Calendario y consultas de clases
+HU-10 Generación e impresión de recibos,AMFAR-16,10398,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:00 AM,,,,0,"h3. Como
+
+Secretaria, Directora o Administrador
+
+h3. Quiero
+
+Generar recibos automáticamente al confirmar un pago
+
+h3. Para
+
+Entregar comprobantes oficiales al alumno o tutor.
+
+h3. Criterios de aceptación
+
+* El sistema debe generar un número único secuencial.
+* Debe incluir datos completos del pago.
+* Debe permitir imprimir y reimprimir recibos.
+* Debe registrar responsable de emisión.
+
+h3. Flujo principal
+
+# El pago cambia a estado “Pagado”.
+# El sistema genera el recibo.
+# El usuario imprime el comprobante.
+# El recibo queda almacenado en historial.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@346392e,,,,,,,,,,,,,,,,0|i000tj:,,,,5.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10355,AMFAR-5,Gestión de pagos y recibos
+HU-09 Gestión automática de pagos,AMFAR-15,10397,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:00 AM,,,,0,"h3. Como
+
+Secretaria, Directora o Administrador
+
+h3. Quiero
+
+Registrar y administrar pagos de alumnos
+
+h3. Para
+
+Controlar el estado financiero de las inscripciones.
+
+h3. Criterios de aceptación
+
+* El sistema debe generar pagos automáticamente.
+* Debe generar nuevos períodos vencidos.
+* Debe permitir modificar estados.
+* No debe permitir eliminar historial.
+* Debe mostrar alertas de vencimiento.
+
+h3. Flujo principal
+
+# Se registra una inscripción.
+# El sistema crea el pago correspondiente.
+# Al vencer el período, genera un nuevo pago pendiente.
+# La Secretaria actualiza el estado cuando el alumno paga.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,28800,28800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@815b3eb,,,,,,,,,,,,,,,,0|i000tb:,,,,8.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10355,AMFAR-5,Gestión de pagos y recibos
+HU-08 Registro completo de inscripción académica,AMFAR-14,10396,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Highest,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:00 AM,,,,0,"h3. Como
+
+Secretaria, Directora o Administrador
+
+h3. Quiero
+
+Registrar una inscripción asignando horario, profesor, instrumento y plan
+
+h3. Para
+
+Formalizar la participación del alumno en la academia.
+
+h3. Criterios de aceptación
+
+* El sistema debe permitir seleccionar alumno, profesor y plan.
+* Debe validar conflictos de horario.
+* Debe validar disponibilidad del instrumento.
+* Debe calcular automáticamente el monto final.
+* Debe registrar días y horarios flexibles.
+* Debe impedir registrar profesores inactivos.
+
+h3. Flujo principal
+
+# La Secretaria selecciona al alumno.
+# Selecciona plan y descuento.
+# Define horarios y días.
+# Selecciona profesor e instrumento.
+# El sistema valida conflictos.
+# El sistema calcula el monto.
+# La inscripción queda registrada.
+
+h3. Flujo alternativo
+
+* Si existe conflicto:
+** El sistema impide guardar la inscripción.
+* Si el profesor está inactivo:
+** El sistema bloquea la asignación.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,46800,46800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@7d705c69,,,,,,,,,,,,,,,,0|i000t3:,,,,13.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10354,AMFAR-4,"Planes, descuentos e inscripciones"
+HU-07 Administración de planes académicos,AMFAR-13,10395,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:00 AM,,,,0,"h3. Como
+
+Administrador o Directora
+
+h3. Quiero
+
+Crear y administrar planes y descuentos
+
+h3. Para
+
+Definir modalidades y costos de inscripción.
+
+h3. Criterios de aceptación
+
+* El sistema debe permitir crear planes.
+* Debe permitir definir horas semanales.
+* Debe permitir configurar descuentos.
+* La Secretaria solo puede seleccionar planes activos existentes.
+
+h3. Flujo principal
+
+# El usuario accede al módulo de planes.
+# Registra nombre, modalidad y precio.
+# Configura descuentos aplicables.
+# El sistema guarda el plan.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@15a7aff1,,,,,,,,,,,,,,,,0|i000sv:,,,,5.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10354,AMFAR-4,"Planes, descuentos e inscripciones"
+HU-06 Préstamo automático de instrumentos,AMFAR-12,10394,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 9:59 AM,,,,0,"h3. Como
+
+Secretaria, Directora o Administrador
+
+h3. Quiero
+
+Verificar automáticamente la disponibilidad de instrumentos al registrar una inscripción
+
+h3. Para
+
+Evitar conflictos y sobreasignaciones de recursos.
+
+h3. Criterios de aceptación
+
+* El sistema debe validar disponibilidad según horario.
+* Debe registrar si el instrumento es prestado o propio.
+* No debe permitir doble reserva.
+* El instrumento debe liberarse automáticamente al finalizar o cancelar la inscripción.
+
+h3. Flujo principal
+
+# El usuario inicia una inscripción.
+# Selecciona instrumento y horario.
+# El sistema valida disponibilidad.
+# Si existe disponibilidad, registra el préstamo.
+# La inscripción se completa correctamente.
+
+h3. Flujo alternativo
+
+* Si no existe disponibilidad:
+** El sistema bloquea la inscripción.
+** Sugiere otro horario o instrumento.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,28800,28800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@67e91c50,,,,,,,,,,,,,,,,0|i000sn:,,,,8.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10353,AMFAR-3,Gestión de recursos e instrumentos
+HU-05 Administración de instrumentos,AMFAR-11,10393,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 9:59 AM,,,,0,"h3. Como
+
+Administrador o Directora
+
+h3. Quiero
+
+Registrar y controlar el stock de instrumentos
+
+h3. Para
+
+Gestionar préstamos y disponibilidad para las clases.
+
+h3. Criterios de aceptación
+
+* El sistema debe permitir registrar instrumentos.
+* Debe permitir modificar stock y estado.
+* Todos los roles pueden consultar disponibilidad.
+* El sistema debe reflejar disponibilidad por horario.
+
+h3. Flujo principal
+
+# El usuario accede al módulo de instrumentos.
+# Registra o modifica un instrumento.
+# El sistema actualiza el stock disponible.
+# Los usuarios pueden consultar disponibilidad.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5e3f8c19,,,,,,,,,,,,,,,,0|i000sf:,,,,5.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10353,AMFAR-3,Gestión de recursos e instrumentos
+HU-04 Registro y administración de profesores,AMFAR-10,10392,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:01 AM,,,,0,"h3. Como
+
+Administrador o Directora
+
+h3. Quiero
+
+Registrar y administrar profesores con sus especialidades
+
+h3. Para
+
+Asignar correctamente docentes a las clases e inscripciones.
+
+h3. Criterios de aceptación
+
+* El sistema debe permitir registrar profesores.
+* Debe permitir definir especialidades/instrumentos.
+* El sistema debe permitir modificar información.
+* Debe permitir activar o desactivar profesores.
+* El sistema no debe permitir asignar profesores inactivos a nuevas clases.
+
+h3. Flujo principal
+
+# El usuario ingresa al módulo de profesores.
+# Registra los datos del profesor.
+# Selecciona sus especialidades.
+# El sistema guarda el perfil.
+# El profesor queda disponible para asignaciones.
+
+h3. Flujo alternativo
+
+* Si el profesor está inactivo:
+** El sistema bloquea nuevas asignaciones.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@332b499,,,,,,,,,,,,,,,,0|i000s7:,,,,5.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10352,AMFAR-2,Gestión de personas
+HU-03 Registro de alumnos y tutores,AMFAR-9,10391,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 10:01 AM,,,,0,"h3. Como
+
+Secretaria, Directora o Administrador
+
+h3. Quiero
+
+Registrar alumnos junto a sus padres o tutores
+
+h3. Para
+
+Mantener organizada la información académica y administrativa de la academia.
+
+h3. Criterios de aceptación
+
+* El sistema debe permitir registrar alumnos nuevos.
+* Debe permitir asociar uno o varios tutores.
+* Un tutor puede estar asociado a varios alumnos.
+* El sistema debe permitir modificar datos posteriormente.
+* Los alumnos no deben tener acceso al sistema.
+* El sistema debe permitir cambiar el estado del alumno a inactivo sin eliminar historial.
+
+h3. Flujo principal
+
+# La Secretaria accede al módulo de alumnos.
+# Registra datos personales del alumno.
+# Registra o selecciona un tutor existente.
+# El sistema vincula tutor y alumno.
+# El sistema guarda la información correctamente.
+
+h3. Flujo alternativo
+
+* Si el tutor ya existe:
+** El sistema permite reutilizar el registro.
+* Si faltan campos obligatorios:
+** El sistema muestra mensajes de validación.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,28800,28800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@7475bee2,,,,,,,,,,,,,,,,0|i000rz:,,,,8.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10352,AMFAR-2,Gestión de personas
+HU-02 Administración de usuarios internos,AMFAR-8,10390,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:33 AM,26/may/26 9:56 AM,,,,0,"h3. Como
+
+Administrador
+
+h3. Quiero
+
+Crear, editar, activar y desactivar cuentas de usuarios internos
+
+h3. Para
+
+Controlar quién puede acceder al sistema y qué permisos posee.
+
+h3. Criterios de aceptación
+
+* El Administrador puede registrar nuevos usuarios.
+* El sistema debe permitir asignar roles.
+* El sistema debe permitir activar o desactivar cuentas.
+* El sistema debe registrar auditoría de acciones críticas.
+* El sistema debe guardar fecha, hora y usuario responsable de cada acción.
+* Usuarios desactivados no pueden iniciar sesión.
+* El backend debe validar permisos por endpoint.
+
+h3. Flujo principal
+
+# El Administrador accede al módulo de usuarios.
+# Registra un nuevo usuario.
+# Selecciona el rol correspondiente.
+# El sistema guarda la información.
+# El sistema registra la acción en auditoría.
+
+h3. Flujo alternativo
+
+* Si el correo ya existe:
+** El sistema impide el registro.
+* Si un usuario intenta acceder sin permisos:
+** El sistema deniega el acceso.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,18000,18000,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5efce233,,,,,,,,,,,,,,,,0|i000rr:,,,,5.0,,,,,,,,,,,,Por hacer,26/may/26 9:33 AM,10351,AMFAR-1,Seguridad y gestión de accesos
+HU-01 Inicio de sesión seguro por roles,AMFAR-7,10389,Historia,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,High,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 9:31 AM,26/may/26 10:06 AM,,,,0,"h3. Como
+
+Administrador, Directora, Secretaria o Profesor
+
+h3. Quiero
+
+Iniciar sesión en el sistema utilizando mi usuario y contraseña
+
+h3. Para
+
+Acceder únicamente a los módulos y funcionalidades permitidos según mi rol dentro de la academia.
+
+h3. Criterios de aceptación
+
+* El usuario debe ingresar correo/usuario y contraseña.
+* El sistema debe validar las credenciales correctamente.
+* El sistema debe identificar automáticamente el rol del usuario.
+* El sistema debe redirigir al usuario a su panel correspondiente.
+* El sistema debe bloquear accesos no autorizados a módulos restringidos.
+* La contraseña debe almacenarse cifrada mediante bcrypt.
+* La autenticación debe utilizar JWT con expiración configurable.
+* El cierre de sesión debe invalidar la sesión activa.
+* El sistema debe mostrar mensajes claros si las credenciales son incorrectas.
+* La comunicación debe realizarse mediante HTTPS.
+
+h3. Flujo principal
+
+# El usuario abre la pantalla de inicio de sesión.
+# Ingresa usuario y contraseña.
+# El sistema valida las credenciales.
+# El sistema identifica el rol del usuario.
+# El sistema genera el token JWT.
+# El usuario accede a las funcionalidades permitidas según su rol.
+
+h3. Flujo alternativo
+
+* Si la contraseña es incorrecta:
+** El sistema muestra mensaje de error.
+** No permite el acceso.
+* Si el usuario está inactivo:
+** El sistema bloquea el inicio de sesión.
+* Si el token expira:
+** El sistema solicita volver a iniciar sesión.",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,28800,28800,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@2c0a4405,,,,,,,,,,,,,,,,0|i000rj:,,,,8.0,,,,,,,,,,,,Por hacer,26/may/26 9:31 AM,10351,AMFAR-1,Seguridad y gestión de accesos
+Calendario y consultas de clases,AMFAR-6,10356,Epic,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 8:34 AM,26/may/26 8:34 AM,,,,0,"Vista de clases programadas filtrable por alumno, profesor, instrumento y día; acceso del profesor a su listado de alumnos con horarios asignados.
+
+RF-10.1 - RF-10.2",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@4c05e42b,,,,ghx-label-2,,To Do,,,,,dark_yellow,,,,,0|i000rb:,,,,,,,,,,,,,,,,Por hacer,26/may/26 8:34 AM,,,
+Gestión de pagos y recibos,AMFAR-5,10355,Epic,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 8:33 AM,26/may/26 8:33 AM,,,,0,"Registro automático de pagos, alertas de vencimiento por período, modificación de estados y generación de recibos con numeración secuencial única.
+
+RF-08 - RF-09",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@423ac41f,,,,ghx-label-12,,To Do,,,,,grey,,,,,0|i000r3:,,,,,,,,,,,,,,,,Por hacer,26/may/26 8:33 AM,,,
+"Planes, descuentos e inscripciones",AMFAR-4,10354,Epic,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 8:33 AM,26/may/26 8:33 AM,,,,0,"Creación de planes y descuentos, registro de inscripciones con asignación de instrumento, profesor y horario, y motor de validación de conflictos.
+
+RF-06 - RF-07 - RF-05.2",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5eae81ae,,,,ghx-label-4,,To Do,,,,,dark_blue,,,,,0|i000qv:,,,,,,,,,,,,,,,,Por hacer,26/may/26 8:33 AM,,,
+Gestión de recursos e instrumentos,AMFAR-3,10353,Epic,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 8:32 AM,26/may/26 8:32 AM,,,,0,"Control de stock de instrumentos, préstamos por sesión, liberación automática y definición de rangos horarios permitidos por día.
+
+RF-04 - RF-05",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@64e54781,,,,ghx-label-3,,To Do,,,,,yellow,,,,,0|i000qn:,,,,,,,,,,,,,,,,Por hacer,26/may/26 8:32 AM,,,
+Gestión de personas,AMFAR-2,10352,Epic,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 8:31 AM,26/may/26 8:31 AM,,,,0,"Registro y administración de alumnos, padres/tutores y profesores, con sus estados, relaciones y perfiles de especialidad.
+
+RF-02 - RF-03 - RF-11
+
+{color:#ffffff}RF-02RF-03RF-11{color}",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@607b94ce,,,,ghx-label-3,,To Do,,,,,yellow,,,,,0|i000qf:,,,,,,,,,,,,,,,,Por hacer,26/may/26 8:31 AM,,,
+Seguridad y gestión de accesos,AMFAR-1,10351,Epic,Tareas por hacer,AMFAR,Academia de Música Fernando Arduz Ruiz,software,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,Medium,,,,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,26/may/26 8:29 AM,26/may/26 8:29 AM,,,,0,"Autenticación por roles, gestión de cuentas de usuarios internos y registro de auditoría de acciones críticas del sistema.
+RF-01.1 - RF-01.2 - RNF-01",,Sergio Villarrubia Arduz,712020:7e31afc4-bb01-4c80-a2f0-b3453a7c5d0c,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@43f55225,,,,ghx-label-13,,To Do,,,,,dark_green,,,,,0|i000q7:,,,,,,,,,,,,,,,,Por hacer,26/may/26 8:29 AM,,,

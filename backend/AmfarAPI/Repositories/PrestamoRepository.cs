@@ -45,6 +45,6 @@ public class PrestamoRepository : IPrestamoRepository
     public async Task<int> ContarActivosPorInstrumentoAsync(int idInstrumento)
     {
         return await _context.PrestamosInstrumentos
-            .CountAsync(p => p.IdInstrumento == idInstrumento && p.Estado == "Activo");
+            .CountAsync(p => p.IdInstrumento == idInstrumento && p.Estado == "Activo" && !p.EsPropio);
     }
 }

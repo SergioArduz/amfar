@@ -9,12 +9,10 @@ namespace AmfarAPI.Controllers;
 public class PrestamoController : ControllerBase
 {
     private readonly IPrestamoService _service;
-    private readonly IInstrumentoService _instrumentoService;
 
-    public PrestamoController(IPrestamoService service, IInstrumentoService instrumentoService)
+    public PrestamoController(IPrestamoService service)
     {
         _service = service;
-        _instrumentoService = instrumentoService;
     }
 
     [HttpPost]

@@ -287,3 +287,10 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,react
+
+# open-mem: Auto-generated folder context files.
+# Uncomment to exclude from version control (recommended for large projects):
+# **/AGENTS.md
+.open-mem/
+stderr.txt
+stdout.txt

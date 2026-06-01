@@ -12,5 +12,5 @@ public interface IPersonaService
 
     Task UpdateAsync(int id, UpdatePersonaDto dto);
 
-    Task DeleteAsync(int id);
+    Task<bool> DeleteAsync(int id);
 }

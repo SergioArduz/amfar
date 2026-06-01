@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AmfarAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/personas")]
 public class PersonaController : ControllerBase
 {
     private readonly IPersonaService _service;
@@ -59,7 +59,10 @@ public class PersonaController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _service.DeleteAsync(id);
+        var eliminado = await _service.DeleteAsync(id);
+
+        if (!eliminado)
+            return NotFound(new { mensaje = "Persona no encontrada" });
 
         return Ok(new
         {

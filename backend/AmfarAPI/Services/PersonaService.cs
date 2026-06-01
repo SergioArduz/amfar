@@ -60,17 +60,26 @@ public class PersonaService : IPersonaService
         var persona = await _repository.GetByIdAsync(id);
 
         if (persona == null)
-            throw new Exception("Persona no encontrada");
+            throw new KeyNotFoundException("Persona no encontrada");
 
-        persona.Nombre = dto.Nombre;
-        persona.Apellido = dto.Apellido;
-        persona.Telefono = dto.Telefono;
+        if (!string.IsNullOrWhiteSpace(dto.Nombre))
+            persona.Nombre = dto.Nombre;
+
+        if (!string.IsNullOrWhiteSpace(dto.Apellido))
+            persona.Apellido = dto.Apellido;
+
+        if (!string.IsNullOrWhiteSpace(dto.Telefono))
+            persona.Telefono = dto.Telefono;
 
         await _repository.UpdateAsync(persona);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
+        var persona = await _repository.GetByIdAsync(id);
+        if (persona == null) return false;
+
         await _repository.DeleteAsync(id);
+        return true;
     }
 }
