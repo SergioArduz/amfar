@@ -1,0 +1,29 @@
+@import "./variables.css";
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--gold-primary);
+  color: white;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+tbody tr:hover {
+  background: #fff7e0;
+}
+
+th {
+  font-weight: 600;
+}
