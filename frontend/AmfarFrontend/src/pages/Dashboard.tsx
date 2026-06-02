@@ -111,7 +111,7 @@ export default function Dashboard() {
             <h3 className="text-xl font-bold text-amfar-black flex items-center gap-2">
               <CalendarIcon className="text-amfar-gold" /> Próximas Clases
             </h3>
-            <button className="text-sm font-bold text-amfar-gold hover:underline">Ver calendario completo</button>
+            <button onClick={() => navigate("/calendario")} className="text-sm font-bold text-amfar-gold hover:underline">Ver calendario completo</button>
           </div>
           <div className="space-y-4">
             {/* Placeholder for list */}

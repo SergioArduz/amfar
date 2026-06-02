@@ -34,7 +34,7 @@ function EditarEstudiante() {
                 setApellido(estudiante.apellido);
                 setTelefono(estudiante.telefono);
                 setTieneInstrumento(estudiante.tieneInstrumento);
-                setIdsTutores(estudiante.tutores.map((t: any) => t.idPersona));
+                setIdsTutores(estudiante.tutores.map((t: any) => t.idTutor));
                 setTutores(listaTutores);
             } catch {
                 toast.error("Error al sincronizar datos del estudiante");

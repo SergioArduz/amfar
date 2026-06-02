@@ -104,6 +104,32 @@ public class ProfesorService : IProfesorService
         if (!string.IsNullOrWhiteSpace(request.Telefono))
             profesor.Persona.Telefono = request.Telefono.Trim();
 
+        if (request.IdsInstrumentos is not null)
+        {
+            var actuales = profesor.Especialidades.Select(e => e.IdInstrumento).ToList();
+            var quitar = actuales.Except(request.IdsInstrumentos).ToList();
+            var agregar = request.IdsInstrumentos.Except(actuales).ToList();
+
+            foreach (var idInst in quitar)
+            {
+                var esp = profesor.Especialidades.First(e => e.IdInstrumento == idInst);
+                _context.EspecialidadProfesores.Remove(esp);
+            }
+
+            foreach (var idInst in agregar)
+            {
+                var inst = await _instrumentoRepo.GetByIdAsync(idInst);
+                if (inst is null)
+                    throw new ArgumentException($"El instrumento con ID {idInst} no existe");
+
+                _context.EspecialidadProfesores.Add(new EspecialidadProfesor
+                {
+                    IdProfesor = id,
+                    IdInstrumento = idInst
+                });
+            }
+        }
+
         _context.Personas.Update(profesor.Persona);
         await _repo.UpdateAsync(profesor);
 
@@ -160,6 +186,8 @@ public class ProfesorService : IProfesorService
     {
         IdProfesor = p.IdProfesor,
         IdPersona = p.IdPersona,
+        Nombre = p.Persona.Nombre,
+        Apellido = p.Persona.Apellido,
         NombreCompleto = $"{p.Persona.Nombre} {p.Persona.Apellido}",
         Telefono = p.Persona.Telefono,
         Estado = p.Estado,

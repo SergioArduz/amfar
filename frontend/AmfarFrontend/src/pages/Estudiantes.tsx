@@ -131,14 +131,14 @@ function Estudiantes() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {e.tutores.length > 0 ? (
-                        <div className="flex -space-x-2 overflow-hidden">
+                        <div className="flex">
                           {e.tutores.map((t, i) => (
                             <div 
                               key={i} 
-                              title={`${t.nombre} ${t.apellido}`}
-                              className="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-amfar-gold flex items-center justify-center text-[10px] text-white font-bold"
+                              title={`${t.nombre || ''} ${t.apellido || ''}`}
+                              className={`inline-flex h-8 w-8 rounded-full ring-2 ring-white bg-amfar-gold items-center justify-center text-[10px] text-white font-bold ${i > 0 ? '-ml-2' : ''}`}
                             >
-                              {t.nombre[0]}{t.apellido[0]}
+                              {(t.nombre || '?')[0]}{(t.apellido || '')[0] || '?'}
                             </div>
                           ))}
                         </div>

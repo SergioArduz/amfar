@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { profesoresApi } from "../api/profesoresApi";
-import type { ProfesorResponse } from "../types/profesor";
-import { UserPlus, Search, Edit2, Trash2, GraduationCap, Phone, Calendar, Loader2 } from "lucide-react";
+import { instrumentosApi } from "../api/instrumentosApi";
+import type { ProfesorResponse, CrearProfesorRequest } from "../types/profesor";
+import type { InstrumentoResponse } from "../types/instrumento";
+import { UserPlus, Search, Edit2, Trash2, GraduationCap, Phone, Calendar, Loader2, X, Music } from "lucide-react";
 import toast from "react-hot-toast";
 
-export default function ProfesoresPage() {
+function ProfesoresPage() {
+  const navigate = useNavigate();
   const [profesores, setProfesores] = useState<ProfesorResponse[]>([]);
+  const [instrumentos, setInstrumentos] = useState<InstrumentoResponse[]>([]);
   const [busqueda, setBusqueda] = useState("");
   const [cargando, setCargando] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [guardando, setGuardando] = useState(false);
+  const [editandoId, setEditandoId] = useState<number | null>(null);
+
+  const [form, setForm] = useState<CrearProfesorRequest>({
+    nombre: "", apellido: "", telefono: "", idsInstrumentos: [],
+  });
 
   const cargarProfesores = async () => {
     setCargando(true);
@@ -23,7 +35,53 @@ export default function ProfesoresPage() {
 
   useEffect(() => {
     cargarProfesores();
+    instrumentosApi.obtenerTodos().then(setInstrumentos).catch(() => {});
   }, []);
+
+  const abrirCrear = () => {
+    setForm({ nombre: "", apellido: "", telefono: "", idsInstrumentos: [] });
+    setEditandoId(null);
+    setShowModal(true);
+  };
+
+  const abrirEditar = (p: ProfesorResponse) => {
+    setForm({ nombre: p.nombre, apellido: p.apellido, telefono: p.telefono, idsInstrumentos: p.especialidades.map(e => e.idInstrumento) });
+    setEditandoId(p.idProfesor);
+    setShowModal(true);
+  };
+
+  const toggleInstrumento = (id: number) => {
+    setForm((prev) => ({
+      ...prev,
+      idsInstrumentos: prev.idsInstrumentos.includes(id)
+        ? prev.idsInstrumentos.filter((i) => i !== id)
+        : [...prev.idsInstrumentos, id],
+    }));
+  };
+
+  const guardar = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.nombre.trim() || !form.apellido.trim()) {
+      toast.error("Nombre y apellido son requeridos");
+      return;
+    }
+    setGuardando(true);
+    try {
+      if (editandoId) {
+        await profesoresApi.actualizar(editandoId, { nombre: form.nombre, apellido: form.apellido, telefono: form.telefono, idsInstrumentos: form.idsInstrumentos });
+        toast.success("Profesor actualizado correctamente");
+      } else {
+        await profesoresApi.crear(form);
+        toast.success("Profesor creado correctamente");
+      }
+      setShowModal(false);
+      await cargarProfesores();
+    } catch {
+      toast.error(editandoId ? "Error al actualizar el profesor" : "Error al crear el profesor");
+    } finally {
+      setGuardando(false);
+    }
+  };
 
   const handleToggleEstado = async (id: number) => {
     try {
@@ -38,7 +96,7 @@ export default function ProfesoresPage() {
   const profesoresFiltrados = profesores.filter(
     (p) =>
       p.nombreCompleto.toLowerCase().includes(busqueda.toLowerCase()) ||
-      p.especialidades.some(e => e.nombreInstrumento.toLowerCase().includes(busqueda.toLowerCase()))
+      p.especialidades.some((e) => e.nombreInstrumento.toLowerCase().includes(busqueda.toLowerCase()))
   );
 
   return (
@@ -48,11 +106,8 @@ export default function ProfesoresPage() {
           <h1 className="text-3xl font-bold text-amfar-black">Cuerpo Docente</h1>
           <p className="text-gray-500 font-medium">Administra los perfiles de los profesores y sus especialidades musicales.</p>
         </div>
-        <button
-          className="bg-amfar-gold text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-amfar-gold/20 hover:scale-[1.02] transition-all"
-        >
-          <UserPlus size={20} />
-          Nuevo Profesor
+        <button onClick={abrirCrear} className="bg-amfar-gold text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-amfar-gold/20 hover:scale-[1.02] transition-all">
+          <UserPlus size={20} /> Nuevo Profesor
         </button>
       </div>
 
@@ -60,13 +115,7 @@ export default function ProfesoresPage() {
         <div className="p-4 border-b border-gray-50 bg-gray-50/50">
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-            <input
-              type="text"
-              placeholder="Buscar por nombre o instrumento..."
-              className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm"
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
+            <input type="text" placeholder="Buscar por nombre o instrumento..." className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
           </div>
         </div>
 
@@ -117,8 +166,7 @@ export default function ProfesoresPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Phone size={14} className="text-gray-400" />
-                        {p.telefono}
+                        <Phone size={14} className="text-gray-400" /> {p.telefono}
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -131,35 +179,25 @@ export default function ProfesoresPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <button 
-                        onClick={() => handleToggleEstado(p.idProfesor)}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold transition-all ${
-                        p.estado === 'Activo' 
-                          ? 'bg-green-100 text-green-800 hover:bg-green-200' 
-                          : 'bg-red-100 text-red-800 hover:bg-red-200'
-                      }`}>
+                      <button onClick={() => handleToggleEstado(p.idProfesor)}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold transition-all ${p.estado === 'Activo' ? 'bg-green-100 text-green-800 hover:bg-green-200' : 'bg-red-100 text-red-800 hover:bg-red-200'}`}>
                         <div className={`w-1.5 h-1.5 rounded-full ${p.estado === 'Activo' ? 'bg-green-500' : 'bg-red-500'}`}></div>
                         {p.estado}
                       </button>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
-                        <Calendar size={14} className="text-gray-300" />
-                        {new Date(p.fechaRegistro).toLocaleDateString()}
+                        <Calendar size={14} className="text-gray-300" /> {new Date(p.fechaRegistro).toLocaleDateString()}
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          className="p-2 text-gray-400 hover:text-amfar-gold hover:bg-amfar-gold/10 rounded-lg transition-all"
-                          title="Editar"
-                        >
+                        <button onClick={() => abrirEditar(p)}
+                          className="p-2 text-gray-400 hover:text-amfar-gold hover:bg-amfar-gold/10 rounded-lg transition-all" title="Editar">
                           <Edit2 size={18} />
                         </button>
-                        <button
-                          className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
-                          title="Dar de baja"
-                        >
+                        <button onClick={() => handleToggleEstado(p.idProfesor)}
+                          className="p-2 text-gray-400 hover:text-orange-500 hover:bg-orange-500/10 rounded-lg transition-all" title={p.estado === "Activo" ? "Desactivar" : "Activar"}>
                           <Trash2 size={18} />
                         </button>
                       </div>
@@ -171,6 +209,68 @@ export default function ProfesoresPage() {
           </table>
         </div>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => !guardando && setShowModal(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => !guardando && setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors" disabled={guardando}>
+              <X size={20} />
+            </button>
+
+            <h2 className="text-xl font-bold text-amfar-black mb-6">{editandoId ? "Editar Profesor" : "Nuevo Profesor"}</h2>
+
+            <form onSubmit={guardar} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nombre *</label>
+                  <input value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} required
+                    className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Apellido *</label>
+                  <input value={form.apellido} onChange={(e) => setForm({ ...form, apellido: e.target.value })} required
+                    className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Teléfono</label>
+                <input value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Especialidades (instrumentos que enseña)</label>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {instrumentos.map((inst) => {
+                    const selected = form.idsInstrumentos.includes(inst.idInstrumento);
+                    return (
+                      <button key={inst.idInstrumento} type="button" onClick={() => toggleInstrumento(inst.idInstrumento)}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
+                          selected ? "bg-amfar-gold text-white border-amfar-gold" : "bg-gray-50 text-gray-600 border-gray-200 hover:border-amfar-gold"
+                        }`}>
+                        <Music size={14} /> {inst.nombre}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button type="button" onClick={() => !guardando && setShowModal(false)} disabled={guardando}
+                  className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-all disabled:opacity-50">Cancelar</button>
+                <button type="submit" disabled={guardando}
+                  className="px-4 py-2 text-sm font-medium text-white bg-amfar-gold hover:bg-yellow-600 rounded-xl transition-all shadow-lg shadow-amfar-gold/20 disabled:opacity-50 flex items-center gap-2">
+                  {guardando && <Loader2 size={16} className="animate-spin" />}
+                  {guardando ? "Guardando..." : editandoId ? "Actualizar Profesor" : "Crear Profesor"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+export default ProfesoresPage;
