@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Users, GraduationCap, CreditCard, Music, TrendingUp, Calendar as CalendarIcon } from "lucide-react";
 import { obtenerEstudiantes } from "../services/estudianteService";
 import { obtenerInscripciones } from "../services/inscripcionService";
@@ -6,6 +7,7 @@ import { obtenerPagos } from "../services/pagoService";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalStudents: 0,
     activeEnrollments: 0,
@@ -138,13 +140,13 @@ export default function Dashboard() {
           <div className="relative z-10">
             <h3 className="text-xl font-bold mb-4">Acceso Rápido</h3>
             <div className="space-y-3">
-              <button className="w-full py-3 px-4 bg-amfar-gold hover:bg-amfar-goldLight text-amfar-black font-bold rounded-xl transition-all flex items-center justify-between">
+              <button onClick={() => navigate("/inscripciones")} className="w-full py-3 px-4 bg-amfar-gold hover:bg-amfar-goldLight text-amfar-black font-bold rounded-xl transition-all flex items-center justify-between">
                 Nueva Inscripción <GraduationCap size={18} />
               </button>
-              <button className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all flex items-center justify-between">
+              <button onClick={() => navigate("/pagos")} className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all flex items-center justify-between">
                 Registrar Pago <CreditCard size={18} />
               </button>
-              <button className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all flex items-center justify-between">
+              <button onClick={() => navigate("/instrumentos")} className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all flex items-center justify-between">
                 Gestionar Instrumentos <Music size={18} />
               </button>
             </div>
