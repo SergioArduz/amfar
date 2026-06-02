@@ -59,13 +59,24 @@ function Layout() {
             Usuarios
           </Link>
 
+          <Link to="/planes">
+            Planes
+          </Link>
+
+          <Link to="/inscripciones">
+            Inscripciones
+          </Link>
+
+          <Link to="/pagos">
+            Pagos
+          </Link>
+
           <button
             className="btn-logout"
             onClick={cerrarSesion}
           >
             Cerrar Sesión
           </button>
-
         </nav>
 
       </header>
