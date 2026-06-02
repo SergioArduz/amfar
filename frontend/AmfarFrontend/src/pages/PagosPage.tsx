@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { pagosApi } from "../api/pagosApi";
 import type { PagoDTO } from "../api/pagosApi";
 import { recibosApi } from "../api/recibosApi";
@@ -11,6 +12,8 @@ import PagoEstadoForm from "../components/pagos/PagoEstadoForm";
 import PagoForm from "../components/pagos/PagoForm";
 
 function PagosPage() {
+  const [params] = useSearchParams();
+  const inscripcionCodigo = params.get("inscripcion") || "";
   const [pagos, setPagos] = useState<PagoDTO[]>([]);
   const [pagoSeleccionado, setPagoSeleccionado] = useState<PagoDTO | null>(null);
   const [cargando, setCargando] = useState(false);
@@ -130,7 +133,7 @@ function PagosPage() {
           <DollarSign size={20} className="text-amfar-gold" />
           Registrar Nuevo Pago
         </h2>
-        <PagoForm onGuardar={guardarPago} />
+        <PagoForm onGuardar={guardarPago} codigoInscripcionInicial={inscripcionCodigo} />
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">

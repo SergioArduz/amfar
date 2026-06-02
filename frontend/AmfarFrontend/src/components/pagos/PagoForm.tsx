@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { PagoDTO } from "../../api/pagosApi";
 
 interface Props {
   onGuardar: (pago: PagoDTO) => void;
+  codigoInscripcionInicial?: string;
 }
 
-function PagoForm({ onGuardar }: Props) {
+function PagoForm({ onGuardar, codigoInscripcionInicial }: Props) {
   const [form, setForm] = useState<PagoDTO>({
     codigo: "",
-    codigoInscripcion: "",
+    codigoInscripcion: codigoInscripcionInicial || "",
     fechaVencimiento: "",
     fechaPago: null,
     monto: 0,
     metodoPago: "",
     estadoPago: "Pendiente",
   });
+
+  useEffect(() => {
+    if (codigoInscripcionInicial) {
+      setForm(prev => ({ ...prev, codigoInscripcion: codigoInscripcionInicial }));
+    }
+  }, [codigoInscripcionInicial]);
 
   const manejarCambio = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

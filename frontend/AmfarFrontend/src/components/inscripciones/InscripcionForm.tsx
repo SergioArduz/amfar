@@ -53,7 +53,7 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
         const [e, p, i] = await Promise.all([
           obtenerEstudiantes(),
           profesoresApi.obtenerTodos("Activo"),
-          instrumentosApi.obtenerTodos("Activo")
+          instrumentosApi.obtenerTodos()
         ]);
         setEstudiantes(e);
         setProfesores(p);

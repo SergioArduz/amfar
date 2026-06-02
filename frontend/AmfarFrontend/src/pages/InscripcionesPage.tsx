@@ -7,11 +7,13 @@ import type { InscripcionDTO } from "../api/inscripcionesApi";
 import type { PlanDTO } from "../api/planesApi";
 import type { DescuentoDTO } from "../api/descuentosApi";
 import type { Estudiante } from "../types/estudiante";
+import { useNavigate } from "react-router-dom";
 import { FileText, Plus, Trash2, Calendar, ClipboardList, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import InscripcionForm from "../components/inscripciones/InscripcionForm";
 
 function InscripcionesPage() {
+  const navigate = useNavigate();
   const [inscripciones, setInscripciones] = useState<InscripcionDTO[]>([]);
   const [planes, setPlanes] = useState<PlanDTO[]>([]);
   const [descuentos, setDescuentos] = useState<DescuentoDTO[]>([]);
@@ -45,10 +47,11 @@ function InscripcionesPage() {
 
   const guardarInscripcion = async (inscripcion: InscripcionDTO) => {
     try {
-      await inscripcionesApi.crear(inscripcion);
+      const creada = await inscripcionesApi.crear(inscripcion);
       await cargarDatos();
       setMostrarForm(false);
       toast.success("Inscripción procesada correctamente");
+      navigate(`/pagos?inscripcion=${creada.codigo}`);
     } catch {
       toast.error("Error al procesar la inscripción. Verifica horarios.");
     }
