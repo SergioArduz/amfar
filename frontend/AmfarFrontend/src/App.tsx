@@ -10,8 +10,16 @@ import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 
 import Estudiantes from "./pages/Estudiantes";
+import CrearEstudiante from "./pages/CrearEstudiante";
+import EditarEstudiante from "./pages/EditarEstudiante";
+
 import Tutores from "./pages/Tutores";
+import CrearTutor from "./pages/CrearTutor";
+import EditarTutor from "./pages/EditarTutor";
+
 import Usuarios from "./pages/Usuarios";
+import CrearUsuario from "./pages/CrearUsuario";
+import EditarUsuario from "./pages/EditarUsuario";
 
 import PlanesPage from "./pages/PlanesPage";
 import InscripcionesPage from "./pages/InscripcionesPage";
@@ -46,13 +54,48 @@ function App() {
           />
 
           <Route
+            path="/estudiantes/nuevo"
+            element={<CrearEstudiante />}
+          />
+
+          <Route
+            path="/estudiantes/editar/:id"
+            element={<EditarEstudiante />}
+          />
+
+
+          {/* TUTORES */}
+
+          <Route
             path="/tutores"
             element={<Tutores />}
           />
 
           <Route
+            path="/tutores/nuevo"
+            element={<CrearTutor />}
+          />
+
+          <Route
+            path="/tutores/editar/:id"
+            element={<EditarTutor />}
+          />
+
+          {/* USUARIOS */}
+
+          <Route
             path="/usuarios"
             element={<Usuarios />}
+          />
+
+          <Route
+            path="/usuarios/nuevo"
+            element={<CrearUsuario />}
+          />
+
+          <Route
+            path="/usuarios/editar/:id"
+            element={<EditarUsuario />}
           />
 
           {/* Módulo Inscripciones */}

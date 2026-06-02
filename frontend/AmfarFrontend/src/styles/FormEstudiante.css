@@ -58,6 +58,26 @@
   color: #111111;
 }
 
+.tutores-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  max-height: 180px;
+  overflow-y: auto;
+
+  border: 1px solid #C9C9C9;
+  border-radius: 8px;
+
+  padding: 10px;
+}
+
+.tutor-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .form-buttons {
   display: flex;
   justify-content: flex-end;
