@@ -94,7 +94,7 @@ export default function Dashboard() {
                   {loading ? <div className="h-8 w-16 bg-gray-100 animate-pulse rounded"></div> : card.value}
                 </h3>
               </div>
-              <div className={`${card.color} p-3 rounded-xl text-white shadow-lg shadow-${card.color.split('-')[1]}-500/20`}>
+              <div className={`${card.color} p-3 rounded-xl text-white shadow-lg`}>
                 <card.icon size={24} />
               </div>
             </div>
