@@ -142,6 +142,15 @@ public class UsuarioService : IUsuarioService
 
         usuario.Email = dto.Email;
 
+        if (usuario.Rol == Models.Enums.Rol.Administrador && dto.Rol != Models.Enums.Rol.Administrador)
+        {
+            var adminsActivos = (await _repository.GetAllAsync())
+                .Count(u => u.Rol == Models.Enums.Rol.Administrador && u.Estado == "Activo");
+
+            if (adminsActivos <= 1)
+                throw new Exception("No se puede cambiar el rol del último administrador activo");
+        }
+
         usuario.Rol = dto.Rol;
 
 
@@ -155,6 +164,15 @@ public class UsuarioService : IUsuarioService
         if (usuario == null)
             throw new Exception("Usuario no encontrado");
 
+        if (usuario.Rol == Models.Enums.Rol.Administrador && usuario.Estado == "Activo")
+        {
+            var adminsActivos = (await _repository.GetAllAsync())
+                .Count(u => u.Rol == Models.Enums.Rol.Administrador && u.Estado == "Activo");
+
+            if (adminsActivos <= 1)
+                throw new Exception("No se puede desactivar el último administrador activo");
+        }
+
         usuario.Estado = usuario.Estado == "Activo" ? "Inactivo" : "Activo";
 
         await _repository.UpdateAsync(usuario);
@@ -162,6 +180,20 @@ public class UsuarioService : IUsuarioService
 
     public async Task DeleteAsync(int id)
     {
+        var usuario = await _repository.GetByIdAsync(id);
+
+        if (usuario == null)
+            throw new Exception("Usuario no encontrado");
+
+        if (usuario.Rol == Models.Enums.Rol.Administrador)
+        {
+            var adminsActivos = (await _repository.GetAllAsync())
+                .Count(u => u.Rol == Models.Enums.Rol.Administrador && u.Estado == "Activo");
+
+            if (adminsActivos <= 1)
+                throw new Exception("No se puede eliminar el último administrador activo");
+        }
+
         await _repository.DeleteAsync(id);
     }
 }

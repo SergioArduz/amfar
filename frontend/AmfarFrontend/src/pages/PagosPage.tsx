@@ -1,19 +1,43 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
 import { pagosApi } from "../api/pagosApi";
 import type { PagoDTO } from "../api/pagosApi";
 import { recibosApi } from "../api/recibosApi";
 import type { ReciboDTO } from "../api/recibosApi";
-import { DollarSign, FileText, X, Loader2 } from "lucide-react";
+import { DollarSign, FileText, X, Loader2, CheckCircle, Clock, AlertTriangle, Ban } from "lucide-react";
 import toast from "react-hot-toast";
 
 import PagosList from "../components/pagos/PagosList";
 import PagoEstadoForm from "../components/pagos/PagoEstadoForm";
-import PagoForm from "../components/pagos/PagoForm";
+
+interface CardResumenProps {
+  icon: React.ReactNode;
+  label: string;
+  valor: string;
+  color: string;
+  bg: string;
+}
+
+function CardResumen({ icon, label, valor, color, bg }: CardResumenProps) {
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 p-4 flex items-center gap-4 shadow-sm">
+      <div className={`${bg} p-3 rounded-xl`}>
+        <div className={color}>{icon}</div>
+      </div>
+      <div>
+        <p className="text-xs text-gray-500 font-medium">{label}</p>
+        <p className={`text-lg font-bold ${color}`}>{valor}</p>
+      </div>
+    </div>
+  );
+}
+
+const estilosCard = {
+  icon: { Pagado: <CheckCircle size={22} />, Pendiente: <Clock size={22} />, Vencido: <AlertTriangle size={22} />, Anulado: <Ban size={22} /> },
+  color: { Pagado: "text-green-600", Pendiente: "text-yellow-600", Vencido: "text-red-600", Anulado: "text-gray-500" },
+  bg: { Pagado: "bg-green-50", Pendiente: "bg-yellow-50", Vencido: "bg-red-50", Anulado: "bg-gray-100" },
+};
 
 function PagosPage() {
-  const [params] = useSearchParams();
-  const inscripcionCodigo = params.get("inscripcion") || "";
   const [pagos, setPagos] = useState<PagoDTO[]>([]);
   const [pagoSeleccionado, setPagoSeleccionado] = useState<PagoDTO | null>(null);
   const [cargando, setCargando] = useState(false);
@@ -37,16 +61,14 @@ function PagosPage() {
 
   useEffect(() => { cargarPagos(); }, []);
 
-  const guardarPago = async (pago: PagoDTO) => {
-    try {
-      await pagosApi.crear(pago);
-      await cargarPagos();
-      toast.success("Pago guardado correctamente");
-    } catch (error) {
-      console.error(error);
-      toast.error("Error al guardar el pago");
-    }
-  };
+  const resumen = useMemo(() => {
+    const total = pagos.length;
+    const pagado = pagos.filter(p => p.estadoPago === "Pagado").length;
+    const pendiente = pagos.filter(p => p.estadoPago === "Pendiente").length;
+    const vencido = pagos.filter(p => p.estadoPago === "Vencido").length;
+    const totalBs = pagos.reduce((s, p) => s + (p.estadoPago === "Pagado" ? p.monto : 0), 0);
+    return { total, pagado, pendiente, vencido, totalBs };
+  }, [pagos]);
 
   const actualizarEstado = async (codigo: string, estadoPago: string, metodoPago: string) => {
     try {
@@ -119,25 +141,31 @@ function PagosPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <div>
-        <h1 className="text-3xl font-bold text-amfar-black">Gestión de Pagos</h1>
-        <p className="text-gray-500">Administra los pagos de inscripciones y su estado.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-amfar-black">Gestión de Pagos</h1>
+          <p className="text-gray-500 mt-1">Administra los pagos de inscripciones y su estado.</p>
+        </div>
       </div>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">{error}</div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h2 className="text-lg font-semibold text-amfar-black mb-4 flex items-center gap-2">
-          <DollarSign size={20} className="text-amfar-gold" />
-          Registrar Nuevo Pago
-        </h2>
-        <PagoForm onGuardar={guardarPago} codigoInscripcionInicial={inscripcionCodigo} />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <CardResumen icon={<DollarSign size={22} />} label="Total Pagos" valor={String(resumen.total)} color="text-amfar-black" bg="bg-gray-100" />
+        <CardResumen icon={estilosCard.icon.Pagado} label="Pagados" valor={String(resumen.pagado)} color={estilosCard.color.Pagado} bg={estilosCard.bg.Pagado} />
+        <CardResumen icon={estilosCard.icon.Pendiente} label="Pendientes" valor={String(resumen.pendiente)} color={estilosCard.color.Pendiente} bg={estilosCard.bg.Pendiente} />
+        <CardResumen icon={estilosCard.icon.Vencido} label="Vencidos" valor={String(resumen.vencido)} color={estilosCard.color.Vencido} bg={estilosCard.bg.Vencido} />
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h2 className="text-lg font-semibold text-amfar-black mb-4">Actualizar Estado de Pago</h2>
+        <h2 className="text-lg font-bold text-amfar-black mb-5 flex items-center gap-2">
+          <div className="bg-amfar-gold/10 p-2 rounded-lg">
+            <CheckCircle size={18} className="text-amfar-gold" />
+          </div>
+          Actualizar Estado de Pago
+        </h2>
         <PagoEstadoForm
           pagoSeleccionado={pagoSeleccionado}
           onGuardar={actualizarEstado}
@@ -146,7 +174,12 @@ function PagosPage() {
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h2 className="text-lg font-semibold text-amfar-black mb-4">Listado de Pagos</h2>
+        <h2 className="text-lg font-bold text-amfar-black mb-5 flex items-center gap-2">
+          <div className="bg-amfar-gold/10 p-2 rounded-lg">
+            <FileText size={18} className="text-amfar-gold" />
+          </div>
+          Listado de Pagos
+        </h2>
         <PagosList
           pagos={pagos}
           onCambiarEstado={setPagoSeleccionado}

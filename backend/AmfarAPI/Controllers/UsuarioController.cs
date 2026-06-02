@@ -21,7 +21,6 @@ public class UsuarioController : ControllerBase
     // GET ALL
     // =========================================
 
-    [Authorize(Roles = "Administrador,Directora")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {

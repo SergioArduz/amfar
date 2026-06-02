@@ -43,11 +43,15 @@ namespace AmfarAPI.Services
 
         public async Task<PagoDTO> Crear(PagoDTO dto)
         {
+            var codigo = string.IsNullOrWhiteSpace(dto.Codigo)
+                ? $"PAG-{DateTime.Now:yyyyMMdd-HHmmss}-{Guid.NewGuid().ToString("N")[..4].ToUpper()}"
+                : dto.Codigo;
+
             var pago = new Pago
             {
-                Codigo = dto.Codigo,
+                Codigo = codigo,
                 CodigoInscripcion = dto.CodigoInscripcion,
-                FechaGeneracion = DateTime.Now,
+                FechaGeneracion = DateTime.UtcNow,
                 FechaVencimiento = dto.FechaVencimiento,
                 FechaPago = dto.FechaPago,
                 Monto = dto.Monto,
@@ -72,7 +76,7 @@ namespace AmfarAPI.Services
 
             if (estadoPago == "Pagado")
             {
-                pago.FechaPago = DateTime.Now;
+                pago.FechaPago = DateTime.UtcNow;
             }
 
             var actualizado = await _pagoRepository.Actualizar(pago);
