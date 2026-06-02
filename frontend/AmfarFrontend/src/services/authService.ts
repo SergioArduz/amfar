@@ -1,7 +1,4 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5178/api/Auth";
-// cambia el puerto por el de tu backend
+import api from "./api";
 
 export interface LoginRequest {
     email: string;
@@ -20,8 +17,8 @@ export interface LoginResponse {
 export const login = async (
     data: LoginRequest
 ): Promise<LoginResponse> => {
-    const response = await axios.post<LoginResponse>(
-        `${API_URL}/login`,
+    const response = await api.post<LoginResponse>(
+        "/Auth/login",
         data
     );
 

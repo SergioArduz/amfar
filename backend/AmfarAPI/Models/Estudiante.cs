@@ -6,6 +6,8 @@ public class Estudiante
 
     public bool TieneInstrumento { get; set; }
 
+    public string Estado { get; set; } = "Activo";
+
 
     // RELACION
     public Persona Persona { get; set; } = null!;

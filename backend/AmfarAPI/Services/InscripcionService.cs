@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AmfarAPI.Services
 {
-    public class InscripcionService
+    public class InscripcionService : IInscripcionService
     {
         private readonly IInscripcionRepository _inscripcionRepository;
         private readonly AppDbContext _context;
@@ -20,14 +20,12 @@ namespace AmfarAPI.Services
         public async Task<List<InscripcionDTO>> ObtenerTodas()
         {
             var inscripciones = await _inscripcionRepository.ObtenerTodas();
-
             return inscripciones.Select(i => MapearDTO(i)).ToList();
         }
 
         public async Task<List<InscripcionDTO>> ObtenerActivas()
         {
             var inscripciones = await _inscripcionRepository.ObtenerActivas();
-
             return inscripciones.Select(i => MapearDTO(i)).ToList();
         }
 
@@ -43,6 +41,10 @@ namespace AmfarAPI.Services
 
         public async Task<InscripcionDTO?> Crear(InscripcionDTO dto)
         {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
             var plan = await _context.Planes
                 .FirstOrDefaultAsync(p => p.Codigo == dto.CodigoPlan && p.Estado == "Activo");
 
@@ -67,12 +69,31 @@ namespace AmfarAPI.Services
                 montoFinal = plan.Monto - (plan.Monto * descuento.Porcentaje / 100);
             }
 
-            foreach (var clase in dto.Clases)
+            var clasesNuevas = dto.Clases.ToList();
+
+            if (clasesNuevas.Count == 0)
+                return null;
+
+            var profesoresDb = await _context.Profesores
+                .ToListAsync();
+
+            var clasesActivas = await _context.InscripcionClases
+                .Where(c => c.Estado == "Activo")
+                .ToListAsync();
+
+            foreach (var clase in clasesNuevas)
             {
-                bool conflictoProfesor = await _context.InscripcionClases.AnyAsync(c =>
+                if (!int.TryParse(clase.CodigoProfesor, out var idProfesor))
+                    return null;
+
+                var profesor = profesoresDb.FirstOrDefault(p => p.IdProfesor == idProfesor);
+
+                if (profesor == null || profesor.Estado != "Activo")
+                    return null;
+
+                var conflictoProfesor = clasesActivas.Any(c =>
                     c.CodigoProfesor == clase.CodigoProfesor &&
                     c.DiaSemana == clase.DiaSemana &&
-                    c.Estado == "Activo" &&
                     clase.HoraInicio < c.HoraFin &&
                     clase.HoraFin > c.HoraInicio
                 );
@@ -82,11 +103,10 @@ namespace AmfarAPI.Services
 
                 if (clase.InstrumentoPrestado && !string.IsNullOrEmpty(clase.CodigoInstrumento))
                 {
-                    bool conflictoInstrumento = await _context.InscripcionClases.AnyAsync(c =>
+                    var conflictoInstrumento = clasesActivas.Any(c =>
                         c.CodigoInstrumento == clase.CodigoInstrumento &&
-                        c.InstrumentoPrestado == true &&
+                        c.InstrumentoPrestado &&
                         c.DiaSemana == clase.DiaSemana &&
-                        c.Estado == "Activo" &&
                         clase.HoraInicio < c.HoraFin &&
                         clase.HoraFin > c.HoraInicio
                     );
@@ -123,11 +143,60 @@ namespace AmfarAPI.Services
 
             var creado = await _inscripcionRepository.Crear(inscripcion);
 
+            var pago = new Pago
+            {
+                Codigo = $"PAG-{dto.Codigo}",
+                CodigoInscripcion = dto.Codigo,
+                FechaGeneracion = DateTime.UtcNow,
+                FechaVencimiento = DateTime.UtcNow.AddMonths(1),
+                Monto = montoFinal,
+                MetodoPago = "Pendiente",
+                EstadoPago = "Pendiente",
+                Estado = "Activo"
+            };
+
+            _context.Pagos.Add(pago);
+            await _context.SaveChangesAsync();
+
+            await transaction.CommitAsync();
+
             return MapearDTO(creado);
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         public async Task<bool> Desactivar(string codigo)
         {
+            var inscripcion = await _context.Inscripciones
+                .FirstOrDefaultAsync(i => i.Codigo == codigo);
+
+            if (inscripcion == null)
+                return false;
+
+            var prestamosActivos = await _context.PrestamosInstrumentos
+                .Where(p => p.IdInscripcion == inscripcion.IdInscripcion
+                         && p.Estado == "Activo"
+                         && !p.EsPropio)
+                .ToListAsync();
+
+            foreach (var prestamo in prestamosActivos)
+            {
+                prestamo.Estado = "Devuelto";
+                prestamo.FechaFin = DateTime.UtcNow;
+
+                var instrumento = await _context.Instrumentos
+                    .FirstOrDefaultAsync(i => i.IdInstrumento == prestamo.IdInstrumento);
+
+                if (instrumento != null)
+                {
+                    instrumento.StockDisponible++;
+                }
+            }
+
             return await _inscripcionRepository.Desactivar(codigo);
         }
 

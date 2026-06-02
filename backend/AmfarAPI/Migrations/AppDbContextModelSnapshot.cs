@@ -22,6 +22,46 @@ namespace AmfarAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("AmfarAPI.Models.Descuento", b =>
+                {
+                    b.Property<int>("Id_Descuento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_Descuento"));
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo");
+
+                    b.Property<string>("NombreDescuento")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<decimal>("Porcentaje")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.HasKey("Id_Descuento");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("descuentos", (string)null);
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.EspecialidadProfesor", b =>
                 {
                     b.Property<int>("IdProfesor")
@@ -44,6 +84,10 @@ namespace AmfarAPI.Migrations
                     b.Property<int>("IdPersona")
                         .HasColumnType("integer")
                         .HasColumnName("id_persona");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("TieneInstrumento")
                         .HasColumnType("boolean")
@@ -69,6 +113,122 @@ namespace AmfarAPI.Migrations
                     b.HasIndex("IdTutor");
 
                     b.ToTable("estudiante_tutor", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Inscripcion", b =>
+                {
+                    b.Property<int>("IdInscripcion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdInscripcion"));
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("CodigoDescuento")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("CodigoEstudiante")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("CodigoPlan")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo");
+
+                    b.Property<string>("EstadoPago")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Pendiente");
+
+                    b.Property<DateTime?>("FechaFin")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Modalidad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<decimal>("MontoFinal")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("IdInscripcion");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("inscripciones", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.InscripcionClase", b =>
+                {
+                    b.Property<int>("IdInscripcionClase")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdInscripcionClase"));
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("CodigoInstrumento")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("CodigoProfesor")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("DiaSemana")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo");
+
+                    b.Property<TimeSpan>("HoraFin")
+                        .HasColumnType("interval");
+
+                    b.Property<TimeSpan>("HoraInicio")
+                        .HasColumnType("interval");
+
+                    b.Property<int>("IdInscripcion")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("InstrumentoPrestado")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("IdInscripcionClase");
+
+                    b.HasIndex("IdInscripcion");
+
+                    b.ToTable("inscripcion_clases", (string)null);
                 });
 
             modelBuilder.Entity("AmfarAPI.Models.Instrumento", b =>
@@ -127,6 +287,63 @@ namespace AmfarAPI.Migrations
                     b.ToTable("instrumento", (string)null);
                 });
 
+            modelBuilder.Entity("AmfarAPI.Models.Pago", b =>
+                {
+                    b.Property<int>("IdPago")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPago"));
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("CodigoInscripcion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo");
+
+                    b.Property<string>("EstadoPago")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Pendiente");
+
+                    b.Property<DateTime>("FechaGeneracion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("FechaPago")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaVencimiento")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("MetodoPago")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("IdPago");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("pagos", (string)null);
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.Persona", b =>
                 {
                     b.Property<int>("IdPersona")
@@ -141,9 +358,6 @@ namespace AmfarAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("apellido");
-
-                    b.Property<int?>("EstudianteIdPersona")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -160,23 +374,61 @@ namespace AmfarAPI.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("telefono");
 
-                    b.Property<int?>("TutorIdPersona")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("UsuarioIdUsuario")
                         .HasColumnType("integer");
 
                     b.HasKey("IdPersona");
 
-                    b.HasIndex("EstudianteIdPersona");
-
                     b.HasIndex("ProfesorIdProfesor");
-
-                    b.HasIndex("TutorIdPersona");
 
                     b.HasIndex("UsuarioIdUsuario");
 
                     b.ToTable("persona", (string)null);
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Plan", b =>
+                {
+                    b.Property<int>("Id_Plan")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_Plan"));
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<bool>("EsIndividual")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo");
+
+                    b.Property<int>("HorasMensuales")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HorasSemanales")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("NombrePlan")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id_Plan");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("planes", (string)null);
                 });
 
             modelBuilder.Entity("AmfarAPI.Models.PrestamoInstrumento", b =>
@@ -259,11 +511,86 @@ namespace AmfarAPI.Migrations
                     b.ToTable("profesor", (string)null);
                 });
 
+            modelBuilder.Entity("AmfarAPI.Models.Recibo", b =>
+                {
+                    b.Property<int>("IdRecibo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_recibo");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRecibo"));
+
+                    b.Property<string>("CodigoPago")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("codigo_pago");
+
+                    b.Property<string>("DatosAlumno")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("datos_alumno");
+
+                    b.Property<string>("EmitidoPor")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("emitido_por");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo")
+                        .HasColumnName("estado");
+
+                    b.Property<DateTime>("FechaEmision")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fecha_emision");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("monto");
+
+                    b.Property<string>("NombrePlan")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nombre_plan");
+
+                    b.Property<string>("NumeroRecibo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("numero_recibo");
+
+                    b.Property<string>("Periodo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("periodo");
+
+                    b.HasKey("IdRecibo");
+
+                    b.HasIndex("CodigoPago");
+
+                    b.HasIndex("NumeroRecibo")
+                        .IsUnique();
+
+                    b.ToTable("recibo", (string)null);
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.Tutor", b =>
                 {
                     b.Property<int>("IdPersona")
                         .HasColumnType("integer")
                         .HasColumnName("id_persona");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Parentesco")
                         .IsRequired()
@@ -295,6 +622,14 @@ namespace AmfarAPI.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)")
                         .HasColumnName("email");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("Activo")
+                        .HasColumnName("estado");
 
                     b.Property<int>("IdPersona")
                         .HasColumnType("integer")
@@ -336,7 +671,7 @@ namespace AmfarAPI.Migrations
             modelBuilder.Entity("AmfarAPI.Models.Estudiante", b =>
                 {
                     b.HasOne("AmfarAPI.Models.Persona", "Persona")
-                        .WithOne()
+                        .WithOne("Estudiante")
                         .HasForeignKey("AmfarAPI.Models.Estudiante", "IdPersona")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -363,29 +698,28 @@ namespace AmfarAPI.Migrations
                     b.Navigation("Tutor");
                 });
 
+            modelBuilder.Entity("AmfarAPI.Models.InscripcionClase", b =>
+                {
+                    b.HasOne("AmfarAPI.Models.Inscripcion", "Inscripcion")
+                        .WithMany("InscripcionClases")
+                        .HasForeignKey("IdInscripcion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inscripcion");
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.Persona", b =>
                 {
-                    b.HasOne("AmfarAPI.Models.Estudiante", "Estudiante")
-                        .WithMany()
-                        .HasForeignKey("EstudianteIdPersona");
-
                     b.HasOne("AmfarAPI.Models.Profesor", "Profesor")
                         .WithMany()
                         .HasForeignKey("ProfesorIdProfesor");
-
-                    b.HasOne("AmfarAPI.Models.Tutor", "Tutor")
-                        .WithMany()
-                        .HasForeignKey("TutorIdPersona");
 
                     b.HasOne("AmfarAPI.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioIdUsuario");
 
-                    b.Navigation("Estudiante");
-
                     b.Navigation("Profesor");
-
-                    b.Navigation("Tutor");
 
                     b.Navigation("Usuario");
                 });
@@ -415,7 +749,7 @@ namespace AmfarAPI.Migrations
             modelBuilder.Entity("AmfarAPI.Models.Tutor", b =>
                 {
                     b.HasOne("AmfarAPI.Models.Persona", "Persona")
-                        .WithOne()
+                        .WithOne("Tutor")
                         .HasForeignKey("AmfarAPI.Models.Tutor", "IdPersona")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -439,11 +773,23 @@ namespace AmfarAPI.Migrations
                     b.Navigation("EstudiantesTutores");
                 });
 
+            modelBuilder.Entity("AmfarAPI.Models.Inscripcion", b =>
+                {
+                    b.Navigation("InscripcionClases");
+                });
+
             modelBuilder.Entity("AmfarAPI.Models.Instrumento", b =>
                 {
                     b.Navigation("EspecialidadProfesores");
 
                     b.Navigation("Prestamos");
+                });
+
+            modelBuilder.Entity("AmfarAPI.Models.Persona", b =>
+                {
+                    b.Navigation("Estudiante");
+
+                    b.Navigation("Tutor");
                 });
 
             modelBuilder.Entity("AmfarAPI.Models.Profesor", b =>

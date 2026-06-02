@@ -14,6 +14,8 @@ public class Usuario
 
     public Rol Rol { get; set; }
 
+    public string Estado { get; set; } = "Activo";
+
 
     // Navigation Property
     public Persona Persona { get; set; } = null!;

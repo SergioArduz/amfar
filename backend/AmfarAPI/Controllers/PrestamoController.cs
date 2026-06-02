@@ -1,11 +1,13 @@
 using AmfarAPI.DTOs;
 using AmfarAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmfarAPI.Controllers;
 
 [ApiController]
 [Route("api/prestamos")]
+[Authorize]
 public class PrestamoController : ControllerBase
 {
     private readonly IPrestamoService _service;
@@ -15,6 +17,7 @@ public class PrestamoController : ControllerBase
         _service = service;
     }
 
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
     [HttpPost]
     public async Task<ActionResult<PrestamoResponse>> Create([FromBody] CrearPrestamoRequest request)
     {
@@ -40,6 +43,7 @@ public class PrestamoController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
     [HttpPut("{id}/devolucion")]
     public async Task<ActionResult<PrestamoResponse>> Devolver(int id, [FromBody] DevolucionRequest request)
     {

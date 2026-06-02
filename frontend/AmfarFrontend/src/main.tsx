@@ -1,5 +1,4 @@
-import "./styles/layout.css";
-import "./styles/tables.css";
+import "./index.css";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

@@ -28,7 +28,8 @@ public class UsuarioService : IUsuarioService
             Telefono = u.Persona.Telefono,
 
             Email = u.Email,
-            Rol = u.Rol
+            Rol = u.Rol,
+            Estado = u.Estado
         });
 
     }
@@ -50,7 +51,8 @@ public class UsuarioService : IUsuarioService
             Telefono = usuario.Persona.Telefono,
 
             Email = usuario.Email,
-            Rol = usuario.Rol
+            Rol = usuario.Rol,
+            Estado = usuario.Estado
         };
     }
 
@@ -142,6 +144,18 @@ public class UsuarioService : IUsuarioService
 
         usuario.Rol = dto.Rol;
 
+
+        await _repository.UpdateAsync(usuario);
+    }
+
+    public async Task ToggleEstadoAsync(int id)
+    {
+        var usuario = await _repository.GetByIdAsync(id);
+
+        if (usuario == null)
+            throw new Exception("Usuario no encontrado");
+
+        usuario.Estado = usuario.Estado == "Activo" ? "Inactivo" : "Activo";
 
         await _repository.UpdateAsync(usuario);
     }

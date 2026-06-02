@@ -1,0 +1,392 @@
+﻿DOCENTE:Ing. Orlando Isaac Aguilera ZambranaDOCENTE:Ing. Orlando Isaac Aguilera ZambranaIngeniería de SistemasIngeniería de SistemasUNIVERSIDAD PRIVADA DOMINGO SAVIOUNIVERSIDAD PRIVADA DOMINGO SAVIO-
+DOCENTE:
+Ing. Orlando Isaac Aguilera Zambrana
+DOCENTE:
+Ing. Orlando Isaac Aguilera Zambrana
+Ingeniería de Sistemas
+Ingeniería de Sistemas
+UNIVERSIDAD PRIVADA DOMINGO SAVIO
+UNIVERSIDAD PRIVADA DOMINGO SAVIO
+FACULTAD DE INGENIERÍAFACULTAD DE INGENIERÍA
+FACULTAD DE INGENIERÍA
+FACULTAD DE INGENIERÍA
+ESTUDIANTE (S):Haly Marcile Bravo FloresJoel David Cerrogrande Ortega Alfredo Fabricio Herbas FloresSergio Villarrubia Arduz ESTUDIANTE (S):Haly Marcile Bravo FloresJoel David Cerrogrande Ortega Alfredo Fabricio Herbas FloresSergio Villarrubia Arduz TRABAJO:DOCUMENTO PROYECTO FINALTRABAJO:DOCUMENTO PROYECTO FINALTARIJA, MAYO 2026TARIJA, MAYO 2026
+ESTUDIANTE (S):
+Haly Marcile Bravo Flores
+Joel David Cerrogrande Ortega
+Alfredo Fabricio Herbas Flores
+Sergio Villarrubia Arduz
+ESTUDIANTE (S):
+Haly Marcile Bravo Flores
+Joel David Cerrogrande Ortega
+Alfredo Fabricio Herbas Flores
+Sergio Villarrubia Arduz
+TRABAJO:DOCUMENTO PROYECTO FINAL
+TRABAJO:DOCUMENTO PROYECTO FINAL
+TARIJA, MAYO 2026
+TARIJA, MAYO 2026
+Introducción
+En la actualidad, la administración eficiente de centros educativos requiere herramientas tecnológicas que optimicen sus procesos internos y mejoren la experiencia del usuario. El presente proyecto consiste en el desarrollo de un sistema web para la gestión integral de una academia de música. Esta plataforma está diseñada para administrar la inscripción de alumnos en diversas disciplinas (canto y distintos instrumentos), ofreciendo un modelo de aprendizaje altamente personalizable.
+El sistema destacará por su capacidad de manejar planes de estudio flexibles, permitiendo a los estudiantes distribuir sus horas semanales de clase según su conveniencia. Además, la plataforma centralizará la asignación de recursos fundamentales, automatizando el emparejamiento de los horarios de los alumnos con la disponibilidad de los profesores y gestionando el inventario de instrumentos para aquellos estudiantes que requieran un préstamo durante sus sesiones.
+Planteamiento del Problema
+Las academias de música tradicionales suelen enfrentar serias dificultades logísticas al intentar ofrecer horarios flexibles a sus estudiantes. Cuando un alumno tiene la libertad de fragmentar sus horas de clase semanales (por ejemplo, tomar tres horas en un solo día o dividirlas en tres días distintos), el registro manual o mediante hojas de cálculo se vuelve ineficiente y propenso a errores humanos.
+Este modelo de negocio genera una triple restricción de disponibilidad: para agendar una clase con éxito, deben coincidir de forma simultánea (1) el horario del alumno, (2) el horario libre del profesor adecuado y (3) la disponibilidad física del instrumento en caso de que el alumno no posea uno propio. Sin un sistema automatizado, realizar este cruce de variables de forma manual genera cuellos de botella en la administración, sobreasignación de recursos (como prestar el mismo instrumento a dos alumnos a la vez) y choques de horarios entre profesores, lo que impacta negativamente en la calidad del servicio y limita la capacidad de crecimiento de la academia.
+Objetivo Principal
+Desarrollar una aplicación web para la gestión administrativa y académica de una academia de música, que automatice el proceso de inscripción, la distribución flexible de horarios y la asignación simultánea de profesores e instrumentos, optimizando el uso de los recursos y mejorando la experiencia de los estudiantes.
+Objetivos Secundarios
+Desarrollar un módulo de inscripción y planes: Crear una interfaz donde los alumnos puedan registrarse, seleccionar su disciplina (instrumento o canto) y elegir entre diferentes planes de suscripción basados en la cantidad de horas semanales y la modalidad de la clase (ej. individual).
+Implementar un motor de agendamiento dinámico: Construir una herramienta de calendario interactivo que permita al alumno fraccionar y distribuir sus horas contratadas en los días y bloques de tiempo de su preferencia, validando la disponibilidad en tiempo real.
+Gestionar el inventario de instrumentos: Desarrollar un submódulo que registre los instrumentos propiedad de la academia y controle su estado de préstamo, asegurando que un instrumento esté disponible en el horario exacto en que un alumno lo solicite.
+Administrar perfiles y disponibilidad de profesores: Crear un registro de docentes que incluya sus especialidades (qué instrumentos enseñan) y sus bloques de horarios laborales, para que el sistema asigne automáticamente al profesor correcto según la elección del alumno.
+Programar algoritmos de validación de conflictos: Implementar la lógica de negocio en el servidor que impida la creación de una clase si no existe coincidencia exacta entre el horario del alumno, el profesor y el instrumento, evitando la sobreposición de reservas (double-booking).
+Alcance del Proyecto
+Funcionalidades Incluidas
+El sistema abarca la gestión integral de los procesos administrativos y académicos de la academia, organizados en los siguientes bloques:
+Gestión de usuarios y accesos: Control de autenticación por roles (Administrador, Directora, Secretaria, Profesor), administración de cuentas y registro de auditoría de acciones críticas.
+Gestión de personas: Registro y seguimiento de alumnos, padres/tutores y profesores, incluyendo estados activo/inactivo y sus relaciones dentro del sistema.
+Gestión académica: Inscripciones con asignación de instrumento, horario, profesor y plan de pago, validando en tiempo real la disponibilidad de recursos y detectando conflictos de horario.
+Gestión de recursos: Control de inventario de instrumentos de la academia, seguimiento de préstamos por sesión y liberación automática al cancelar o finalizar una inscripción.
+Gestión de pagos y recibos: Registro automático de pagos por período, alertas de vencimiento, modificación de estados y generación de recibos con numeración secuencial.
+Calendario: Vista de clases programadas filtrable por alumno, profesor, instrumento y día, accesible para todos los roles del sistema.
+Funcionalidades Excluidas
+Dashboard con estadísticas e indicadores: El sistema no incluirá un panel de métricas operativas (alumnos activos, ocupación de profesores, instrumentos más solicitados, etc.). Su desarrollo requeriría una capa adicional de análisis de datos y visualización que excede el alcance definido para esta etapa, cuya prioridad es la automatización de procesos administrativos.
+Módulo financiero y estadísticas económicas: No se contempla la generación de reportes de ingresos, balances, proyecciones de cobranza ni ningún análisis económico. El sistema registra pagos individuales como soporte operativo, pero no está diseñado para funcionar como herramienta contable o financiera; esa función corresponde a un sistema especializado externo.
+Portal de acceso para alumnos y padres: Los alumnos y padres/tutores no tendrán acceso al sistema bajo ninguna circunstancia, por lo que quedan excluidas funcionalidades como consulta de horarios propios, pagos en línea o comunicación directa a través de la plataforma.
+Requerimientos Funcionales
+RF-01 · Gestión de Usuarios y Autenticación
+RF-01.1 El sistema debe permitir el inicio de sesión con usuario y contraseña según el rol (Administrador, Directora, Secretaria, Profesor), controlando el acceso a los módulos según los permisos correspondientes y permitiendo el cierre de sesión seguro desde cualquier punto de la aplicación.
+RF-01.2 El Administrador puede crear, editar, activar y desactivar cuentas de usuarios internos, y el sistema debe registrar un log de accesos y acciones críticas indicando quién realizó cada acción y cuándo.
+RF-02 · Gestión de Alumnos
+RF-02.1 La Secretaria, Directora y Administrador pueden registrar, modificar, buscar y dar de baja alumnos (estado inactivo) sin eliminar su historial, pudiendo asociar uno o más padres/tutores nuevos o existentes en cualquier momento.
+RF-02.2 Los alumnos no tendrán acceso al sistema bajo ninguna circunstancia.
+RF-03 · Gestión de Padres / Tutores
+RF-03.1 La Secretaria, Directora y Administrador pueden registrar y modificar padres/tutores con sus datos personales y relación con el alumno, permitiendo que un mismo padre/tutor esté asociado a más de un alumno.
+RF-04 · Gestión de Instrumentos
+RF-04.1 El Administrador y la Directora pueden registrar y gestionar el stock de instrumentos (agregar, dar de baja, modificar estado), mientras que todos los roles pueden consultar su disponibilidad por día y hora.
+RF-04.2 Al registrar una inscripción, el sistema debe verificar la disponibilidad del instrumento en el horario asignado, registrar el préstamo o indicar instrumento propio, y liberar automáticamente el instrumento al finalizar o cancelar la inscripción.
+RF-05 · Gestión de Horarios
+RF-05.1 El Administrador y la Directora pueden definir y modificar los rangos de horario permitidos por día, y la Secretaria, Directora y Administrador pueden asignar horarios a los alumnos dentro de esos rangos.
+RF-05.2 El sistema debe validar que el horario seleccionado no exceda los límites definidos y detectar conflictos de horario para el mismo profesor o instrumento prestado.
+RF-06 · Gestión de Planes y Descuentos
+RF-06.1 El Administrador y la Directora pueden crear, editar y desactivar planes de pago y descuentos, especificando sus condiciones y criterios de aplicación.
+RF-06.2 La Secretaria solo puede seleccionar planes y descuentos activos ya existentes al registrar o renovar una inscripción, sin poder crearlos ni modificarlos.
+RF-07 · Gestión de Inscripciones / Clases
+RF-07.1 La Secretaria, Directora y Administrador pueden registrar y modificar inscripciones de alumnos, seleccionando instrumento, horario, días, plan, descuento y profesor asignado, verificando que no existan conflictos de horario para el profesor.
+RF-07.2 El sistema debe calcular automáticamente el monto a pagar según el plan y descuento seleccionados, e impedir la inscripción si el instrumento prestado no está disponible en el horario elegido.
+RF-08 · Gestión de Pagos
+RF-08.1 El sistema debe registrar automáticamente los pagos al completar la inscripción, generar nuevos registros al vencer cada período y enviar alertas internas ante pagos próximos a vencer o ya vencidos.
+RF-08.2 La Secretaria, Directora y Administrador pueden modificar el estado y los datos de un pago, con acceso al historial según su rol, sin poder eliminar registros históricos.
+RF-09 · Generación de Recibos
+RF-09.1 Al registrar un pago como "Pagado", el sistema debe permitir generar, imprimir y reimprimir un recibo con número de comprobante único y secuencial, incluyendo los datos del alumno, plan, período, montos y responsable del registro.
+RF-10 · Calendario y Vista de Clases
+RF-10.1 El sistema debe mostrar un calendario con las clases programadas, filtrable por profesor, instrumento, día o alumno, accesible para todos los roles con acceso al sistema.
+RF-10.2 El Profesor puede consultar el listado de sus alumnos asignados con el detalle de horario e instrumento de cada uno.
+RF-11 · Gestión de Profesores
+RF-11.1 El Administrador y la Directora pueden registrar, modificar y desactivar perfiles de profesores, y el sistema debe impedir asignar un profesor inactivo a una nueva clase.
+Requerimientos No Funcionales
+RNF-01 · Seguridad
+RNF-01.1 Las contraseñas deben almacenarse con hash seguro (bcrypt), la comunicación debe realizarse por HTTPS y la autenticación mediante JWT con tiempo de expiración configurable.
+RNF-01.2 El backend debe validar permisos por rol en cada endpoint y el sistema debe protegerse contra ataques comunes (SQL Injection, XSS, CSRF), tratando los datos sensibles conforme a la normativa de protección de datos aplicable.
+RNF-02 · Rendimiento
+RNF-02.1 Las páginas y listados principales deben cargar en menos de 3 segundos, soportando al menos 20 usuarios concurrentes y contando con índices adecuados en las columnas de búsqueda frecuente.
+RNF-03 · Usabilidad
+RNF-03.1 La interfaz debe ser intuitiva y responsiva, con mensajes de error claros y confirmación antes de ejecutar acciones irreversibles.
+RNF-04 · Disponibilidad y Confiabilidad
+RNF-04.1 El sistema debe tener una disponibilidad mínima del 99% en horario de operación, con backups semanales de la base de datos y manejo elegante de errores sin exponer información técnica al usuario.
+RNF-05 · Mantenibilidad
+RNF-05.1 El backend debe seguir una arquitectura en capas (Controladores, Servicios, Repositorios), con migraciones versionadas para la base de datos y código comentado con convenciones de nomenclatura consistentes.
+RNF-05.2 El frontend debe organizarse en componentes reutilizables con un estado global manejable (Context API o Redux).
+RNF-06 · Escalabilidad
+RNF-06.1 La arquitectura y el diseño de la base de datos deben permitir agregar nuevos módulos, roles o volumen de datos sin reestructuraciones mayores.
+Modelo de Base de Datos
+Roles
+Rol
+Responsable
+Justificación
+Product Owner
+Sergio Villarrubia Arduz
+El más cercano al negocio, entendiendo su lógica para poder dirigir el proyecto
+Scrum Master
+Sergio Villarrubia Arduz
+Facilita el proceso Scrum, organiza sprints y asegura el cumplimiento de tiempos y metodología.
+Developers
+Haly Marcile Bravo Flores
+Joel David Cerrogrande Ortega
+Alfredo Fabricio Herbas Flores
+Encargado de implementar el sistema web (frontend, backend y base de datos).
+Product Backlog
+Código
+Historio Usuario
+Descripción
+RF
+HU-01
+Inicio de sesión seguro por roles
+Como usuario del sistema quiero iniciar sesión para acceder según mi rol
+RF-01.1
+HU-02
+Gestión de usuarios internos
+Como administrador quiero gestionar cuentas internas
+RF-01.2
+HU-03
+Registro de alumnos
+Como secretaria quiero registrar alumnos para mantener actualizada la información académica de la academia.
+RF-02
+HU-04
+Registro de tutores
+Como secretaria quiero registrar y asociar tutores a los alumnos para gestionar correctamente la información de contacto y responsabilidad.
+RF-03
+HU-05
+Gestión de profesores
+Como administrador quiero registrar y administrar profesores
+RF-11
+HU-06
+Gestión de instrumentos
+Como administrador quiero gestionar el stock de instrumentos
+RF-04.1
+HU-07
+Validación de disponibilidad de instrumentos
+Como sistema quiero verificar la disponibilidad de instrumentos durante las inscripciones para evitar asignaciones simultáneas.
+RF-04.2
+HU-08
+Validación de conflictos de horarios
+Como sistema quiero detectar conflictos de horarios de profesores e instrumentos para garantizar una programación correcta de las clases.
+RF-05.2
+HU-09
+Gestión de planes y descuentos
+Como administrador quiero definir planes de pago
+RF-06
+HU-10
+Registro de inscripciones
+Como secretaria quiero inscribir alumnos con horarios y profesor
+RF-07
+HU-11
+Gestión automática de pagos
+Como sistema quiero generar pagos automáticamente
+RF-08
+HU-12
+Generación de recibos
+Como secretaria quiero generar recibos de pago
+RF-09
+HU-13
+Visualización de calendario
+Como usuario quiero ver clases en un calendario
+RF-10.1
+HU-14
+Consulta de alumnos por profesor
+Como profesor quiero ver mis alumnos asignados
+RF-10.2
+La historia de usuario 3 y 6 esta siendo desglosada.
+Sprints
+Sprint
+Historias de Usuario
+Justificación
+1
+HU-01, HU-02
+Se implementa el acceso al sistema y la gestión de usuarios, base para todo el sistema y control de seguridad.
+2
+HU-03, HU-04
+Se gestionan las entidades principales del sistema académico (alumnos y profesores).
+3
+HU-05, HU-06
+Control de inventario y validación de disponibilidad, clave para evitar conflictos en clases.
+4
+HU-07, HU-08
+Se define la estructura económica y el proceso principal del negocio: inscripción de alumnos.
+5
+HU-09, HU-10
+Se automatiza el sistema financiero operativo (pagos y comprobantes).
+6
+HU-11, HU-12
+Se implementa la visualización final del sistema para profesores y usuarios.
+Sprint Planning
+Z|Implementar el sistema de autenticación y gestión de usuarios internos, permitiendo el acceso seguro al sistema mediante roles (Administrador, Directora, Secretaria y Profesor), asegurando la protección de los módulos y el control de permisos.
+Sprint 1
+Historia de Usuario
+ID: HU-1
+Título: Inicio de sesión seguro por roles
+Usuarios: Administrador, Directora, Secretaria, Profesor
+Prioridad: Alta
+Responsable: responsable 1 Sergio Villarrubia Arduz
+Descripción: Como Administrador, Directora, Secretaria o Profesor Quiero Iniciar sesión en el sistema utilizando mi usuario y contraseña Para Acceder únicamente a los módulos y funcionalidades permitidos según mi rol dentro de la academia.
+Criterio de aceptación:
+·  El usuario debe ingresar correo/usuario y contraseña.
+·  El sistema debe validar las credenciales correctamente.
+·  El sistema debe identificar automáticamente el rol del usuario.
+·  El sistema debe redirigir al usuario a su panel correspondiente.
+·  El sistema debe bloquear accesos no autorizados a módulos restringidos.
+·  La contraseña debe almacenarse cifrada mediante bcrypt.
+·  La autenticación debe utilizar JWT con expiración configurable.
+·  El cierre de sesión debe invalidar la sesión activa.
+·  El sistema debe mostrar mensajes claros si las credenciales son incorrectas.
+·  La comunicación debe realizarse mediante HTTPS.
+Historia de Usuario
+ID: HU-2
+Título: Administración de usuarios internos
+Usuarios: Administrador
+Prioridad: Alta
+Responsable: responsable 1 Sergio Villarrubia Arduz
+Descripción: Como Administrador Quiero Crear, editar, activar y desactivar cuentas de usuarios internos Para Controlar quién puede acceder al sistema y qué permisos posee.
+Criterio de aceptación:
+·  El Administrador puede registrar nuevos usuarios.
+·  El sistema debe permitir asignar roles.
+·  El sistema debe permitir activar o desactivar cuentas.
+·  El sistema debe registrar auditoría de acciones críticas.
+·  El sistema debe guardar fecha, hora y usuario responsable de cada acción.
+·  Usuarios desactivados no pueden iniciar sesión.
+·  El backend debe validar permisos por endpoint.
+Sprint 02
+Sprint Goal
+Desarrollar la gestión de las entidades principales del sistema académico, permitiendo el registro, modificación y administración de alumnos, tutores y profesores, estableciendo la base estructural de los usuarios del sistema.
+Historia de Usuario
+ID: HU-3
+Título: Registro de alumnos y tutores
+Usuarios: Secretaria, Directora, Administrador
+Prioridad: Alta
+Responsable: responsable 1 Sergio Villarrubia Arduz
+Descripción: Como Secretaria, Directora o Administrador Quiero Registrar alumnos junto a sus padres o tutores Para Mantener organizada la información académica y administrativa de la academia.
+Criterio de aceptación:
+·  El sistema debe permitir registrar alumnos nuevos.
+·  Debe permitir asociar uno o varios tutores.
+·  Un tutor puede estar asociado a varios alumnos.
+·  El sistema debe permitir modificar datos posteriormente.
+·  Los alumnos no deben tener acceso al sistema.
+·  El sistema debe permitir cambiar el estado del alumno a inactivo sin eliminar historial.
+Historia de Usuario
+ID: HU-4
+Título: Registro y administración de profesores
+Usuarios: Administrador, Directora
+Prioridad: Alta
+Responsable: responsable 2 Joel David Cerrogrande Ortega
+Descripción: Como Administrador o Directora Quiero Registrar y administrar profesores con sus especialidades Para Asignar correctamente docentes a las clases e inscripciones.
+Criterio de aceptación:
+·  El sistema debe permitir registrar profesores.
+·  Debe permitir definir especialidades/instrumentos.
+·  El sistema debe permitir modificar información.
+·  Debe permitir activar o desactivar profesores.
+·  El sistema no debe permitir asignar profesores inactivos a nuevas clases.
+Sprint 03
+Sprint Goal
+Implementar la administración del inventario de instrumentos y la validación de disponibilidad en tiempo real, asegurando el control de préstamos y evitando conflictos de asignación en las clases.
+Historia de Usuario
+ID: HU-5
+Título: Administración de instrumentos
+Usuarios: Administrador, Directora
+Prioridad: Alta
+Responsable: responsable 2 Joel David Cerrogrande Ortega
+Descripción: Como Administrador o Directora Quiero Registrar y controlar el stock de instrumentos Para Gestionar préstamos y disponibilidad para las clases.
+Criterio de aceptación:
+·  El sistema debe permitir registrar instrumentos.
+·  Debe permitir modificar stock y estado.
+·  Todos los roles pueden consultar disponibilidad.
+·  El sistema debe reflejar disponibilidad por horario.
+Historia de Usuario
+ID: HU-6
+Título: Préstamo automático de instrumentos
+Usuarios: Secretaria, Directora, Administrador
+Prioridad: Alta
+Responsable: responsable 2 Joel David Cerrogrande Ortega
+Descripción: Como Secretaria, Directora o Administrador Quiero Verificar automáticamente la disponibilidad de instrumentos al registrar una inscripción Para Evitar conflictos y sobreasignaciones de recursos.
+Criterio de aceptación:
+·  El sistema debe validar disponibilidad según horario.
+·  Debe registrar si el instrumento es prestado o propio.
+·  No debe permitir doble reserva.
+·  El instrumento debe liberarse automáticamente al finalizar o cancelar la inscripción.
+Sprint 04
+Sprint Goal
+Desarrollar el módulo de planes de estudio e inscripciones, permitiendo la creación de planes, selección de horarios flexibles y registro de inscripciones con validación de disponibilidad de profesores e instrumentos.
+Historia de Usuario
+ID: HU-7
+Título: Administración de planes académicos
+Usuarios: Administrador, Directora
+Prioridad: Alta
+Responsable: responsable 3 Haly Marcile Bravo Flores
+Descripción: Como Administrador o Directora Quiero Crear y administrar planes y descuentos Para Definir modalidades y costos de inscripción.
+Criterio de aceptación:
+·  El sistema debe permitir crear planes.
+·  Debe permitir definir horas semanales.
+·  Debe permitir configurar descuentos.
+·  La Secretaria solo puede seleccionar planes activos existentes.
+Historia de Usuario
+ID: HU-8
+Título: Registro completo de inscripción académica
+Usuarios: Secretaria, Directora, Administrador
+Prioridad: Muy Alta
+Responsable: responsable 3 Haly Marcile Bravo Flores
+Descripción: Como Secretaria, Directora o Administrador Quiero Registrar una inscripción asignando horario, profesor, instrumento y plan Para Formalizar la participación del alumno en la academia.
+Criterio de aceptación:
+·  El sistema debe permitir seleccionar alumno, profesor y plan.
+·  Debe validar conflictos de horario.
+·  Debe validar disponibilidad del instrumento.
+·  Debe calcular automáticamente el monto final.
+·  Debe registrar días y horarios flexibles.
+·  Debe impedir registrar profesores inactivos.
+Sprint 05
+Sprint Goal
+Implementar el sistema de pagos automáticos y generación de recibos, asegurando el registro de transacciones, el control de vencimientos y la emisión de comprobantes oficiales por cada inscripción.
+Historia de Usuario
+ID: HU-9
+Título: Gestión automática de pagos
+Usuarios: Secretaria, Directora, Administrador
+Prioridad: Alta
+Responsable: responsable 3 Haly Marcile Bravo Flores
+Descripción: Como Secretaria, Directora o Administrador Quiero Registrar y administrar pagos de alumnos Para Controlar el estado financiero de las inscripciones.
+Criterio de aceptación:
+·  El sistema debe generar pagos automáticamente.
+·  Debe generar nuevos períodos vencidos.
+·  Debe permitir modificar estados.
+·  No debe permitir eliminar historial.
+·  Debe mostrar alertas de vencimiento.
+Historia de Usuario
+ID: HU-10
+Título: Generación e impresión de recibos
+Usuarios: Secretaria, Directora, Administrador
+Prioridad: Alta
+Responsable: responsable 4 Alfredo Fabricio Herbas Flores
+Descripción: Como Secretaria, Directora o Administrador Quiero Generar recibos automáticamente al confirmar un pago Para Entregar comprobantes oficiales al alumno o tutor.
+Criterio de aceptación:
+·  El sistema debe generar un número único secuencial.
+·  Debe incluir datos completos del pago.
+·  Debe permitir imprimir y reimprimir recibos.
+·  Debe registrar responsable de emisión.
+Sprint 06
+Sprint Goal
+Desarrollar la visualización del calendario académico y los módulos de consulta, permitiendo a los usuarios ver clases programadas filtradas y a los profesores consultar sus alumnos asignados con sus respectivos horarios.
+Historia de Usuario
+ID: HU-11
+Título: Consulta de calendario académico
+Usuarios: Usuario del sistema
+Prioridad: Media
+Responsable: responsable 4 Alfredo Fabricio Herbas Flores
+Descripción: Como Usuario del sistema Quiero Visualizar las clases programadas en un calendario Para Consultar horarios y organización académica.
+Criterio de aceptación:
+·  El sistema debe mostrar clases por día.
+·  Debe permitir filtros.
+·  Debe cargar rápidamente la información.
+·  Debe funcionar para todos los roles autorizados.
+Historia de Usuario
+ID: HU-12
+Título: Consulta de alumnos por profesor
+Usuarios: Profesor
+Prioridad: Alta
+Responsable: responsable 4 Alfredo Fabricio Herbas Flores
+Descripción: Como Profesor Quiero Ver el listado de mis alumnos y horarios asignados Para Organizar correctamente mis clases.
+Criterio de aceptación:
+·  El profesor solo puede ver sus propios alumnos.
+·  Debe visualizar horario e instrumento.
+·  No debe tener acceso a pagos ni administración.
+Capturas de pantalla
+Conclusiones
+Se logró diseñar una propuesta de sistema web capaz de gestionar de forma integral los procesos administrativos y académicos de una academia de música, centralizando la información de alumnos, tutores, profesores, instrumentos, inscripciones y pagos en una única plataforma.
+El análisis realizado permitió identificar los principales problemas asociados a la administración manual de horarios y recursos, proponiendo mecanismos de validación automática que reducen significativamente los conflictos de asignación de profesores e instrumentos.
+La definición de requerimientos funcionales y no funcionales permitió establecer una base sólida para el desarrollo del sistema, garantizando aspectos de seguridad, rendimiento, mantenibilidad y escalabilidad.
+La aplicación de la metodología Scrum facilitó la organización del proyecto mediante historias de usuario y sprints, permitiendo una planificación gradual de las funcionalidades según su prioridad dentro del negocio.
+El modelo de base de datos diseñado proporciona una estructura adecuada para gestionar relaciones complejas entre alumnos, tutores, profesores, horarios, instrumentos e inscripciones, asegurando la integridad y consistencia de la información.
+La solución propuesta contribuye a optimizar los procesos de la academia, disminuyendo la carga administrativa, reduciendo errores operativos y mejorando el control sobre los recursos académicos disponibles.
+Dificultades Presentadas
+La principal dificultad fue el análisis de la lógica de negocio relacionada con la distribución flexible de horarios, debido a la necesidad de considerar simultáneamente la disponibilidad de alumnos, profesores e instrumentos.
+Resultó complejo diseñar las reglas de validación para evitar conflictos de horarios y sobreasignación de recursos, ya que una misma inscripción puede involucrar múltiples días y horarios diferentes.
+La elaboración del modelo de base de datos requirió un análisis detallado de las relaciones entre las distintas entidades del sistema, especialmente en los procesos de inscripción, asignación de clases y control de instrumentos.
+La definición de roles y permisos representó un desafío importante, debido a que cada tipo de usuario posee diferentes niveles de acceso y responsabilidades dentro de la academia.
+La planificación de los sprints y la distribución de funcionalidades demandó un proceso de organización cuidadoso para mantener la coherencia entre los requerimientos funcionales, las historias de usuario y los objetivos del proyecto.
+La integración de diferentes tecnologías para el desarrollo del sistema (frontend, backend y base de datos) implicó considerar aspectos adicionales de seguridad, comunicación y mantenimiento para garantizar el correcto funcionamiento de la aplicación.
+La identificación y delimitación del alcance del proyecto requirió establecer claramente qué funcionalidades serían incluidas y cuáles quedarían para futuras versiones, evitando extender innecesariamente la complejidad del sistema.

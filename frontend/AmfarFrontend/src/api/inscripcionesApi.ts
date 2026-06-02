@@ -22,27 +22,27 @@ export interface InscripcionDTO {
 
 export const inscripcionesApi = {
   obtenerTodas: async (): Promise<InscripcionDTO[]> => {
-    const response = await apiClient.get("/Inscripcions");
+    const response = await apiClient.get("/inscripciones");
     return response.data;
   },
 
   obtenerActivas: async (): Promise<InscripcionDTO[]> => {
-    const response = await apiClient.get("/Inscripcions/activas");
+    const response = await apiClient.get("/inscripciones/activas");
     return response.data;
   },
 
   obtenerPorCodigo: async (codigo: string): Promise<InscripcionDTO> => {
-    const response = await apiClient.get(`/Inscripcions/${codigo}`);
+    const response = await apiClient.get(`/inscripciones/${codigo}`);
     return response.data;
   },
 
   crear: async (inscripcion: InscripcionDTO): Promise<InscripcionDTO> => {
-    const response = await apiClient.post("/Inscripcions", inscripcion);
+    const response = await apiClient.post("/inscripciones", inscripcion);
     return response.data;
   },
 
   desactivar: async (codigo: string): Promise<string> => {
-    const response = await apiClient.delete(`/Inscripcions/${codigo}`);
+    const response = await apiClient.delete(`/inscripciones/${codigo}`);
     return response.data;
   },
 };

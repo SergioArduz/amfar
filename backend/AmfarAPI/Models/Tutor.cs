@@ -6,6 +6,8 @@ public class Tutor
 
     public string Parentesco { get; set; } = string.Empty;
 
+    public string Estado { get; set; } = "Activo";
+
 
     // RELACION
     public Persona Persona { get; set; } = null!;

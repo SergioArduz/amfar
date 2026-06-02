@@ -1,63 +1,66 @@
 ﻿using AmfarAPI.DTOs;
-using AmfarAPI.Services;
+using AmfarAPI.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AmfarAPI.Controllers
+namespace AmfarAPI.Controllers;
+
+[Route("api/inscripciones")]
+[ApiController]
+[Authorize]
+public class InscripcionesController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class InscripcionsController : ControllerBase
+    private readonly IInscripcionService _inscripcionService;
+
+    public InscripcionesController(IInscripcionService inscripcionService)
     {
-        private readonly InscripcionService _inscripcionService;
+        _inscripcionService = inscripcionService;
+    }
 
-        public InscripcionsController(InscripcionService inscripcionService)
-        {
-            _inscripcionService = inscripcionService;
-        }
+    [HttpGet]
+    public async Task<ActionResult<List<InscripcionDTO>>> ObtenerTodas()
+    {
+        return Ok(await _inscripcionService.ObtenerTodas());
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<List<InscripcionDTO>>> ObtenerTodas()
-        {
-            return Ok(await _inscripcionService.ObtenerTodas());
-        }
+    [HttpGet("activas")]
+    public async Task<ActionResult<List<InscripcionDTO>>> ObtenerActivas()
+    {
+        return Ok(await _inscripcionService.ObtenerActivas());
+    }
 
-        [HttpGet("activas")]
-        public async Task<ActionResult<List<InscripcionDTO>>> ObtenerActivas()
-        {
-            return Ok(await _inscripcionService.ObtenerActivas());
-        }
+    [HttpGet("{codigo}")]
+    public async Task<ActionResult<InscripcionDTO>> ObtenerPorCodigo(string codigo)
+    {
+        var inscripcion = await _inscripcionService.ObtenerPorCodigo(codigo);
 
-        [HttpGet("{codigo}")]
-        public async Task<ActionResult<InscripcionDTO>> ObtenerPorCodigo(string codigo)
-        {
-            var inscripcion = await _inscripcionService.ObtenerPorCodigo(codigo);
+        if (inscripcion == null)
+            return NotFound(new { mensaje = "Inscripción no encontrada." });
 
-            if (inscripcion == null)
-                return NotFound("No se encontró la inscripción.");
+        return Ok(inscripcion);
+    }
 
-            return Ok(inscripcion);
-        }
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
+    [HttpPost]
+    public async Task<ActionResult<InscripcionDTO>> Crear(InscripcionDTO dto)
+    {
+        var inscripcion = await _inscripcionService.Crear(dto);
 
-        [HttpPost]
-        public async Task<ActionResult<InscripcionDTO>> Crear(InscripcionDTO dto)
-        {
-            var inscripcion = await _inscripcionService.Crear(dto);
+        if (inscripcion == null)
+            return BadRequest(new { mensaje = "No se pudo registrar la inscripción. Revisa plan, descuento o conflictos de horario." });
 
-            if (inscripcion == null)
-                return BadRequest("No se pudo registrar la inscripción. Revisa plan, descuento o conflictos de horario.");
+        return CreatedAtAction(nameof(ObtenerPorCodigo), new { codigo = inscripcion.Codigo }, inscripcion);
+    }
 
-            return Ok(inscripcion);
-        }
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
+    [HttpDelete("{codigo}")]
+    public async Task<ActionResult> Desactivar(string codigo)
+    {
+        var resultado = await _inscripcionService.Desactivar(codigo);
 
-        [HttpDelete("{codigo}")]
-        public async Task<ActionResult> Desactivar(string codigo)
-        {
-            var resultado = await _inscripcionService.Desactivar(codigo);
+        if (!resultado)
+            return NotFound(new { mensaje = "Inscripción no encontrada." });
 
-            if (!resultado)
-                return NotFound("No se encontró la inscripción.");
-
-            return Ok("Inscripción desactivada correctamente.");
-        }
+        return Ok(new { mensaje = "Inscripción desactivada correctamente." });
     }
 }

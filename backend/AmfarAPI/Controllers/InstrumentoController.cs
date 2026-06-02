@@ -1,11 +1,13 @@
 using AmfarAPI.DTOs;
 using AmfarAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmfarAPI.Controllers;
 
 [ApiController]
 [Route("api/instrumentos")]
+[Authorize]
 public class InstrumentoController : ControllerBase
 {
     private readonly IInstrumentoService _service;
@@ -32,6 +34,7 @@ public class InstrumentoController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Administrador,Directora")]
     [HttpPost]
     public async Task<ActionResult<InstrumentoResponse>> Create([FromBody] CrearInstrumentoRequest request)
     {
@@ -46,6 +49,7 @@ public class InstrumentoController : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Administrador,Directora")]
     [HttpPut("{id}")]
     public async Task<ActionResult<InstrumentoResponse>> Update(int id, [FromBody] ActualizarInstrumentoRequest request)
     {
@@ -54,6 +58,7 @@ public class InstrumentoController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Administrador,Directora")]
     [HttpPatch("{id}/estado")]
     public async Task<ActionResult<InstrumentoResponse>> CambiarEstado(int id, [FromBody] CambiarEstadoInstrumentoRequest request)
     {

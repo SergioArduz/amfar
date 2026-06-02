@@ -19,4 +19,6 @@ public class UsuarioDto
     public string Email { get; set; } = string.Empty;
 
     public Rol Rol { get; set; }
+
+    public string Estado { get; set; } = "Activo";
 }

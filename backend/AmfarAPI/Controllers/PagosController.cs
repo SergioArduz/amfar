@@ -1,79 +1,82 @@
 ﻿using AmfarAPI.DTOs;
-using AmfarAPI.Services;
+using AmfarAPI.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AmfarAPI.Controllers
+namespace AmfarAPI.Controllers;
+
+[Route("api/pagos")]
+[ApiController]
+[Authorize]
+public class PagosController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PagosController : ControllerBase
+    private readonly IPagoService _pagoService;
+
+    public PagosController(IPagoService pagoService)
     {
-        private readonly PagoService _pagoService;
+        _pagoService = pagoService;
+    }
 
-        public PagosController(PagoService pagoService)
-        {
-            _pagoService = pagoService;
-        }
+    [HttpGet]
+    public async Task<ActionResult<List<PagoDTO>>> ObtenerTodos()
+    {
+        return Ok(await _pagoService.ObtenerTodos());
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<List<PagoDTO>>> ObtenerTodos()
-        {
-            return Ok(await _pagoService.ObtenerTodos());
-        }
+    [HttpGet("activos")]
+    public async Task<ActionResult<List<PagoDTO>>> ObtenerActivos()
+    {
+        return Ok(await _pagoService.ObtenerActivos());
+    }
 
-        [HttpGet("activos")]
-        public async Task<ActionResult<List<PagoDTO>>> ObtenerActivos()
-        {
-            return Ok(await _pagoService.ObtenerActivos());
-        }
+    [HttpGet("{codigo}")]
+    public async Task<ActionResult<PagoDTO>> ObtenerPorCodigo(string codigo)
+    {
+        var pago = await _pagoService.ObtenerPorCodigo(codigo);
 
-        [HttpGet("{codigo}")]
-        public async Task<ActionResult<PagoDTO>> ObtenerPorCodigo(string codigo)
-        {
-            var pago = await _pagoService.ObtenerPorCodigo(codigo);
+        if (pago == null)
+            return NotFound(new { mensaje = "Pago no encontrado." });
 
-            if (pago == null)
-                return NotFound("No se encontró el pago.");
+        return Ok(pago);
+    }
 
-            return Ok(pago);
-        }
+    [HttpGet("inscripcion/{codigoInscripcion}")]
+    public async Task<ActionResult<List<PagoDTO>>> ObtenerPorInscripcion(string codigoInscripcion)
+    {
+        return Ok(await _pagoService.ObtenerPorInscripcion(codigoInscripcion));
+    }
 
-        [HttpGet("inscripcion/{codigoInscripcion}")]
-        public async Task<ActionResult<List<PagoDTO>>> ObtenerPorInscripcion(string codigoInscripcion)
-        {
-            return Ok(await _pagoService.ObtenerPorInscripcion(codigoInscripcion));
-        }
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
+    [HttpPost]
+    public async Task<ActionResult<PagoDTO>> Crear(PagoDTO dto)
+    {
+        var pago = await _pagoService.Crear(dto);
+        return CreatedAtAction(nameof(ObtenerPorCodigo), new { codigo = pago.Codigo }, pago);
+    }
 
-        [HttpPost]
-        public async Task<ActionResult<PagoDTO>> Crear(PagoDTO dto)
-        {
-            var pago = await _pagoService.Crear(dto);
-            return Ok(pago);
-        }
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
+    [HttpPut("{codigo}/estado")]
+    public async Task<ActionResult<PagoDTO>> ActualizarEstadoPago(
+        string codigo,
+        [FromBody] ActualizarEstadoPagoRequest request)
+    {
+        var pago = await _pagoService.ActualizarEstadoPago(codigo, request.EstadoPago, request.MetodoPago);
 
-        [HttpPut("{codigo}/estado")]
-        public async Task<ActionResult<PagoDTO>> ActualizarEstadoPago(
-            string codigo,
-            string estadoPago,
-            string metodoPago)
-        {
-            var pago = await _pagoService.ActualizarEstadoPago(codigo, estadoPago, metodoPago);
+        if (pago == null)
+            return NotFound(new { mensaje = "Pago no encontrado." });
 
-            if (pago == null)
-                return NotFound("No se encontró el pago.");
+        return Ok(pago);
+    }
 
-            return Ok(pago);
-        }
+    [Authorize(Roles = "Administrador")]
+    [HttpDelete("{codigo}")]
+    public async Task<ActionResult> Desactivar(string codigo)
+    {
+        var resultado = await _pagoService.Desactivar(codigo);
 
-        [HttpDelete("{codigo}")]
-        public async Task<ActionResult> Desactivar(string codigo)
-        {
-            var resultado = await _pagoService.Desactivar(codigo);
+        if (!resultado)
+            return NotFound(new { mensaje = "Pago no encontrado." });
 
-            if (!resultado)
-                return NotFound("No se encontró el pago.");
-
-            return Ok("Pago desactivado correctamente.");
-        }
+        return Ok(new { mensaje = "Pago desactivado correctamente." });
     }
 }

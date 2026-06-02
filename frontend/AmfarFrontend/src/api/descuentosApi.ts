@@ -9,22 +9,22 @@ export interface DescuentoDTO {
 
 export const descuentosApi = {
   obtenerTodos: async (): Promise<DescuentoDTO[]> => {
-    const response = await apiClient.get("/Descuentoes");
+    const response = await apiClient.get("/descuentos");
     return response.data;
   },
 
   obtenerActivos: async (): Promise<DescuentoDTO[]> => {
-    const response = await apiClient.get("/Descuentoes/activos");
+    const response = await apiClient.get("/descuentos/activos");
     return response.data;
   },
 
   obtenerPorCodigo: async (codigo: string): Promise<DescuentoDTO> => {
-    const response = await apiClient.get(`/Descuentoes/${codigo}`);
+    const response = await apiClient.get(`/descuentos/${codigo}`);
     return response.data;
   },
 
   crear: async (descuento: DescuentoDTO): Promise<DescuentoDTO> => {
-    const response = await apiClient.post("/Descuentoes", descuento);
+    const response = await apiClient.post("/descuentos", descuento);
     return response.data;
   },
 
@@ -32,12 +32,12 @@ export const descuentosApi = {
     codigo: string,
     descuento: DescuentoDTO
   ): Promise<DescuentoDTO> => {
-    const response = await apiClient.put(`/Descuentoes/${codigo}`, descuento);
+    const response = await apiClient.put(`/descuentos/${codigo}`, descuento);
     return response.data;
   },
 
   desactivar: async (codigo: string): Promise<string> => {
-    const response = await apiClient.delete(`/Descuentoes/${codigo}`);
+    const response = await apiClient.delete(`/descuentos/${codigo}`);
     return response.data;
   },
 };

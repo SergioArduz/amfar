@@ -15,6 +15,7 @@ public class EstudianteRepository
     public async Task<IEnumerable<Estudiante>> GetAllAsync()
     {
         return await _context.Estudiantes
+            .Where(e => e.Estado == "Activo")
             .Include(e => e.Persona)
             .Include(e => e.EstudiantesTutores)
                 .ThenInclude(et => et.Tutor)
@@ -29,7 +30,7 @@ public class EstudianteRepository
             .Include(e => e.EstudiantesTutores)
                 .ThenInclude(et => et.Tutor)
                     .ThenInclude(t => t.Persona)
-            .FirstOrDefaultAsync(e => e.IdPersona == id);
+            .FirstOrDefaultAsync(e => e.IdPersona == id && e.Estado == "Activo");
     }
 
     public async Task AddAsync(Estudiante estudiante)
@@ -53,7 +54,7 @@ public class EstudianteRepository
 
         if (estudiante != null)
         {
-            _context.Estudiantes.Remove(estudiante);
+            estudiante.Estado = "Inactivo";
 
             await _context.SaveChangesAsync();
         }

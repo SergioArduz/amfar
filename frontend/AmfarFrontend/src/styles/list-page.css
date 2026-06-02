@@ -1,0 +1,97 @@
+@import "./variables.css";
+
+.estudiantes-container,
+.tutores-container {
+  padding: 2rem;
+  background: var(--gray-bg);
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: var(--black);
+}
+
+.btn-crear {
+  background: var(--gold-primary);
+  color: white;
+  border: none;
+  padding: .65rem 1.1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-crear:hover {
+  background: var(--gold-dark);
+}
+
+.input-busqueda {
+  width: 300px;
+  padding: .65rem 1rem;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-sm);
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.input-busqueda:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+}
+
+.estudiantes-container table,
+.tutores-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+}
+
+.estudiantes-container thead,
+.tutores-container thead {
+  background: var(--gold-primary);
+  color: white;
+}
+
+.estudiantes-container th,
+.estudiantes-container td,
+.tutores-container th,
+.tutores-container td {
+  padding: .85rem;
+  border-bottom: 1px solid var(--gray-border);
+  text-align: left;
+}
+
+.btn-editar {
+  background: var(--yellow-soft);
+  color: var(--black);
+  border: none;
+  padding: .5rem .85rem;
+  margin-right: .5rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: .85rem;
+}
+
+.btn-editar:hover {
+  opacity: .85;
+}
+
+.btn-eliminar {
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: .5rem .85rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: .85rem;
+}
+
+.btn-eliminar:hover {
+  opacity: .85;
+}

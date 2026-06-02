@@ -28,6 +28,12 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .IsRequired();
 
 
+        entity.Property(u => u.Estado)
+            .HasColumnName("estado")
+            .HasMaxLength(20)
+            .HasDefaultValue("Activo")
+            .IsRequired();
+
         entity.Property(u => u.Rol)
             .HasColumnName("rol")
             .HasConversion<int>()

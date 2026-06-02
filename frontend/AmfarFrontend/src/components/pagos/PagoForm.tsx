@@ -20,7 +20,6 @@ function PagoForm({ onGuardar }: Props) {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
     setForm((prev) => ({
       ...prev,
       [name]: name === "monto" ? Number(value) : value,
@@ -36,95 +35,69 @@ function PagoForm({ onGuardar }: Props) {
     e.preventDefault();
 
     const pagoEnviar: PagoDTO = {
-      codigo: form.codigo,
-      codigoInscripcion: form.codigoInscripcion,
+      ...form,
       fechaVencimiento: convertirFechaUTC(form.fechaVencimiento),
       fechaPago:
         form.estadoPago === "Pagado" && form.fechaPago
           ? convertirFechaUTC(form.fechaPago)
           : null,
-      monto: form.monto,
-      metodoPago: form.metodoPago,
-      estadoPago: form.estadoPago,
     };
-
-    console.log("PAGO ENVIADO:", pagoEnviar);
 
     onGuardar(pagoEnviar);
   };
 
   return (
-    <form onSubmit={enviar}>
-      <h3>Registrar Pago</h3>
-
-      <div className="form-grid">
-        <input
-          name="codigo"
-          placeholder="Código pago"
-          value={form.codigo}
-          onChange={manejarCambio}
-          required
-        />
-
-        <input
-          name="codigoInscripcion"
-          placeholder="Código inscripción"
-          value={form.codigoInscripcion}
-          onChange={manejarCambio}
-          required
-        />
-
-        <input
-          name="fechaVencimiento"
-          type="datetime-local"
-          value={form.fechaVencimiento}
-          onChange={manejarCambio}
-          required
-        />
-
-        <input
-          name="monto"
-          type="number"
-          placeholder="Monto"
-          value={form.monto}
-          onChange={manejarCambio}
-          required
-        />
-
-        <select
-          name="estadoPago"
-          value={form.estadoPago}
-          onChange={manejarCambio}
-        >
-          <option value="Pendiente">Pendiente</option>
-          <option value="Pagado">Pagado</option>
-          <option value="Vencido">Vencido</option>
-          <option value="Anulado">Anulado</option>
-        </select>
-
-        <input
-          name="metodoPago"
-          placeholder="Método de pago"
-          value={form.metodoPago}
-          onChange={manejarCambio}
-        />
-
+    <form onSubmit={enviar} className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Código Pago</label>
+          <input name="codigo" placeholder="Ej: PAG-001" value={form.codigo} onChange={manejarCambio} required
+            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Código Inscripción</label>
+          <input name="codigoInscripcion" placeholder="Ej: INS-001" value={form.codigoInscripcion} onChange={manejarCambio} required
+            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Monto (Bs.)</label>
+          <input name="monto" type="number" placeholder="0.00" value={form.monto} onChange={manejarCambio} required
+            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Fecha Vencimiento</label>
+          <input name="fechaVencimiento" type="datetime-local" value={form.fechaVencimiento} onChange={manejarCambio} required
+            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Estado</label>
+          <select name="estadoPago" value={form.estadoPago} onChange={manejarCambio}
+            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm bg-white">
+            <option value="Pendiente">Pendiente</option>
+            <option value="Pagado">Pagado</option>
+            <option value="Vencido">Vencido</option>
+            <option value="Anulado">Anulado</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Método de Pago</label>
+          <input name="metodoPago" placeholder="Ej: Efectivo, Transferencia" value={form.metodoPago} onChange={manejarCambio}
+            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+        </div>
         {form.estadoPago === "Pagado" && (
-          <input
-            name="fechaPago"
-            type="datetime-local"
-            value={form.fechaPago ?? ""}
-            onChange={manejarCambio}
-            required
-          />
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Fecha de Pago</label>
+            <input name="fechaPago" type="datetime-local" value={form.fechaPago ?? ""} onChange={manejarCambio} required
+              className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amfar-gold outline-none transition-all text-sm" />
+          </div>
         )}
       </div>
 
-      <br />
-
-      <button className="btn-primary" type="submit">
-        Guardar pago
-      </button>
+      <div className="flex justify-end pt-2">
+        <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-amfar-gold hover:bg-yellow-600 rounded-xl transition-all shadow-lg shadow-amfar-gold/20">
+          Guardar Pago
+        </button>
+      </div>
     </form>
   );
 }

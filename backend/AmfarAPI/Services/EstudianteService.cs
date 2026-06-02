@@ -172,6 +172,11 @@ public class EstudianteService : IEstudianteService
             dto.IdsTutores
         );
     }
+    public async Task DeleteAsync(int id)
+    {
+        await _repository.DeleteAsync(id);
+    }
+
     public async Task AsignarTutorAsync(
         int idEstudiante,
         AsignarTutorDto dto)

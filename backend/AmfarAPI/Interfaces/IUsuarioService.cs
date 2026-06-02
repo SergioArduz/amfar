@@ -12,5 +12,7 @@ public interface IUsuarioService
 
     Task UpdateAsync(int id, UpdateUsuarioDto dto);
 
+    Task ToggleEstadoAsync(int id);
+
     Task DeleteAsync(int id);
 }

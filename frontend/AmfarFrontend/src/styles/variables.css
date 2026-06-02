@@ -1,5 +1,6 @@
 :root {
   --gold-primary: #D9A441;
+  --gold-dark: #8B6914;
   --gold-light: #E8C46A;
   --yellow-soft: #E5D75A;
 
@@ -10,8 +11,8 @@
 
   --white: #ffffff;
 
-  --shadow:
-    0 4px 12px rgba(0,0,0,0.08);
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
 
   --radius: 12px;
+  --radius-sm: 8px;
 }

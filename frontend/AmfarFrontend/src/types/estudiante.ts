@@ -2,6 +2,7 @@ export interface Tutor {
   idTutor: number;
   nombre: string;
   apellido: string;
+  telefono: string;
   parentesco: string;
 }
 

@@ -32,6 +32,7 @@ public class AppDbContext : DbContext
     public DbSet<Inscripcion> Inscripciones { get; set; } = default!;
     public DbSet<InscripcionClase> InscripcionClases { get; set; } = default!;
     public DbSet<AmfarAPI.Models.Pago> Pagos { get; set; } = default!;
+    public DbSet<AmfarAPI.Models.Recibo> Recibos { get; set; } = default!;
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -38,6 +38,13 @@ public class AuthService : IAuthService
         if (usuario == null)
             return null;
 
+        // ========================================
+        // VALIDAR ESTADO ACTIVO
+        // ========================================
+
+        if (usuario.Estado == "Inactivo")
+            return null;
+
 
         // ========================================
         // VALIDAR PASSWORD

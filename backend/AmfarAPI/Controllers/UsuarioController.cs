@@ -109,9 +109,26 @@ public class UsuarioController : ControllerBase
     }
 
     // =========================================
+    // TOGGLE ESTADO
+    // =========================================
+
+    [Authorize(Roles = "Administrador")]
+    [HttpPatch("{id}/estado")]
+    public async Task<IActionResult> ToggleEstado(int id)
+    {
+        await _service.ToggleEstadoAsync(id);
+
+        return Ok(new
+        {
+            mensaje = "Estado de usuario actualizado correctamente"
+        });
+    }
+
+    // =========================================
     // DELETE
     // =========================================
 
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

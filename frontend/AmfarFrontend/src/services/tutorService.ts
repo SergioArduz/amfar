@@ -1,5 +1,12 @@
 import api from "./api";
 
+export interface CrearTutorRequest {
+  nombre: string;
+  apellido: string;
+  telefono: string;
+  parentesco: string;
+}
+
 export const obtenerTutores = async () => {
   const response =
     await api.get("/Tutor");
@@ -17,7 +24,7 @@ export const obtenerTutorPorId = async (
 };
 
 export const crearTutor = async (
-  tutor: any
+  tutor: CrearTutorRequest
 ) => {
   const response =
     await api.post("/Tutor", tutor);
@@ -27,7 +34,7 @@ export const crearTutor = async (
 
 export const actualizarTutor = async (
   id: number,
-  tutor: any
+  tutor: CrearTutorRequest
 ) => {
   const response =
     await api.put(

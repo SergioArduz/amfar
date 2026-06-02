@@ -93,6 +93,18 @@ public class EstudianteController : ControllerBase
     // DELETE
     // ========================================
 
+    [Authorize(Roles =
+        "Administrador,Directora,Secretaria")]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _service.DeleteAsync(id);
+
+        return Ok(new
+        {
+            mensaje = "Estudiante eliminado correctamente"
+        });
+    }
 
     // ========================================
     // ASIGNAR TUTOR

@@ -15,6 +15,7 @@ public class TutorRepository
     public async Task<IEnumerable<Tutor>> GetAllAsync()
     {
         return await _context.Tutores
+            .Where(t => t.Estado == "Activo")
             .Include(t => t.Persona)
             .ToListAsync();
     }
@@ -23,7 +24,7 @@ public class TutorRepository
     {
         return await _context.Tutores
             .Include(t => t.Persona)
-            .FirstOrDefaultAsync(t => t.IdPersona == id);
+            .FirstOrDefaultAsync(t => t.IdPersona == id && t.Estado == "Activo");
     }
 
     public async Task AddAsync(Tutor tutor)
@@ -46,7 +47,7 @@ public class TutorRepository
 
         if (tutor != null)
         {
-            _context.Tutores.Remove(tutor);
+            tutor.Estado = "Inactivo";
 
             await _context.SaveChangesAsync();
         }

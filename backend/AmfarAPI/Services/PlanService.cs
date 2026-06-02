@@ -4,7 +4,7 @@ using AmfarAPI.Models;
 
 namespace AmfarAPI.Services
 {
-    public class PlanService
+    public class PlanService : IPlanService
     {
         private readonly IPlanRepository _planRepository;
 
@@ -43,7 +43,7 @@ namespace AmfarAPI.Services
             }).ToList();
         }
 
-        public async Task<PlanDTO> ObtenerPorCodigo(string codigo)
+        public async Task<PlanDTO?> ObtenerPorCodigo(string codigo)
         {
             var plan = await _planRepository.ObtenerPorCodigo(codigo);
 
@@ -87,7 +87,7 @@ namespace AmfarAPI.Services
             };
         }
 
-        public async Task<PlanDTO> Actualizar(string codigo, PlanDTO dto)
+        public async Task<PlanDTO?> Actualizar(string codigo, PlanDTO dto)
         {
             var plan = await _planRepository.ObtenerPorCodigo(codigo);
 

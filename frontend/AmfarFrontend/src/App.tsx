@@ -3,7 +3,7 @@ import {
     Routes,
     Route,
     Navigate,
-    Link
+    useLocation,
 } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -19,35 +19,45 @@ import EditarTutor from "./pages/EditarTutor";
 import PlanesPage from "./pages/PlanesPage";
 import InscripcionesPage from "./pages/InscripcionesPage";
 import PagosPage from "./pages/PagosPage";
+import Dashboard from "./pages/Dashboard";
+import Calendario from "./pages/Calendario";
+import InstrumentosPage from "./pages/InstrumentosPage";
+import ProfesoresPage from "./pages/ProfesoresPage";
+import { Layout } from "./components/Layout";
 
-function App() {
-    return (
-        <BrowserRouter>
+// Wrapper para manejar el Layout solo en rutas protegidas
+function AppContent() {
+    const location = useLocation();
+    const isLoginPage = location.pathname === "/";
 
-            <div className="page-container">
-                <nav className="card">
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "20px",
-                            alignItems: "center",
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        <Link to="/planes">Planes</Link>
-                        <Link to="/inscripciones">Inscripciones</Link>
-                        <Link to="/pagos">Pagos</Link>
-                        <Link to="/estudiantes">Estudiantes</Link>
-                        <Link to="/tutores">Tutores</Link>
-                    </div>
-                </nav>
-            </div>
-
+    if (isLoginPage) {
+        return (
             <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+        );
+    }
+
+    return (
+        <Layout>
+            <Routes>
+                <Route
+                    path="/dashboard"
+                    element={
+                        <PrivateRoute>
+                            <Dashboard />
+                        </PrivateRoute>
+                    }
+                />
 
                 <Route
-                    path="/"
-                    element={<Login />}
+                    path="/calendario"
+                    element={
+                        <PrivateRoute>
+                            <Calendario />
+                        </PrivateRoute>
+                    }
                 />
 
                 <Route
@@ -105,6 +115,24 @@ function App() {
                 />
 
                 <Route
+                    path="/profesores"
+                    element={
+                        <PrivateRoute>
+                            <ProfesoresPage />
+                        </PrivateRoute>
+                    }
+                />
+
+                <Route
+                    path="/instrumentos"
+                    element={
+                        <PrivateRoute>
+                            <InstrumentosPage />
+                        </PrivateRoute>
+                    }
+                />
+
+                <Route
                     path="/planes"
                     element={
                         <PrivateRoute>
@@ -130,14 +158,18 @@ function App() {
                         </PrivateRoute>
                     }
                 />
-
-                <Route
-                    path="*"
-                    element={<Navigate to="/" />}
-                />
-
+                
+                {/* Fallback for authenticated users */}
+                <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
+        </Layout>
+    );
+}
 
+function App() {
+    return (
+        <BrowserRouter>
+            <AppContent />
         </BrowserRouter>
     );
 }

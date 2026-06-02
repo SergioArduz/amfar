@@ -1,10 +1,3 @@
-import axios from "axios";
+import api from "../services/api";
 
-const apiClient = axios.create({
-  baseURL: "https://localhost:7285/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-export default apiClient;
+export default api;

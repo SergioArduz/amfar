@@ -1,92 +1,92 @@
 .form-container {
   min-height: 100vh;
-  background: #F2F2F2;
+  background: var(--gray-bg);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 2rem;
 }
 
 .form-card {
   width: 100%;
   max-width: 700px;
-  background: white;
-  padding: 35px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  background: var(--white);
+  padding: 2.2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .form-card h1 {
-  margin-bottom: 25px;
-  color: #111111;
+  margin-bottom: 1.5rem;
+  color: var(--black);
   text-align: center;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px;
+  margin-bottom: 1.1rem;
 }
 
 .form-group label {
-  margin-bottom: 8px;
+  margin-bottom: .4rem;
   font-weight: 600;
-  color: #111111;
+  color: var(--black);
 }
 
 .form-group input {
-  padding: 12px;
-  border: 1px solid #C9C9C9;
-  border-radius: 8px;
+  padding: .75rem;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-sm);
   font-size: 14px;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #D9A441;
+  border-color: var(--gold-primary);
 }
 
 .checkbox-group {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 25px;
+  gap: .6rem;
+  margin-top: .6rem;
+  margin-bottom: 1.5rem;
 }
 
 .checkbox-group label {
-  color: #111111;
+  color: var(--black);
 }
 
 .form-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: .6rem;
 }
 
 .btn-guardar {
-  background: #D9A441;
+  background: var(--gold-primary);
   color: white;
   border: none;
-  padding: 12px 18px;
-  border-radius: 8px;
+  padding: .75rem 1.1rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 600;
 }
 
 .btn-guardar:hover {
-  background: #E8C46A;
+  background: var(--gold-dark);
 }
 
 .btn-cancelar {
-  background: #111111;
+  background: var(--black);
   color: white;
   border: none;
-  padding: 12px 18px;
-  border-radius: 8px;
+  padding: .75rem 1.1rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
 }
 
 .btn-cancelar:hover {
-  opacity: 0.9;
+  opacity: .9;
 }

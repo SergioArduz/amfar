@@ -11,29 +11,29 @@ export interface PagoDTO {
 
 export const pagosApi = {
   obtenerTodos: async (): Promise<PagoDTO[]> => {
-    const response = await apiClient.get("/Pagos");
+    const response = await apiClient.get("/pagos");
     return response.data;
   },
 
   obtenerActivos: async (): Promise<PagoDTO[]> => {
-    const response = await apiClient.get("/Pagos/activos");
+    const response = await apiClient.get("/pagos/activos");
     return response.data;
   },
 
   obtenerPorCodigo: async (codigo: string): Promise<PagoDTO> => {
-    const response = await apiClient.get(`/Pagos/${codigo}`);
+    const response = await apiClient.get(`/pagos/${codigo}`);
     return response.data;
   },
 
   obtenerPorInscripcion: async (
     codigoInscripcion: string
   ): Promise<PagoDTO[]> => {
-    const response = await apiClient.get(`/Pagos/inscripcion/${codigoInscripcion}`);
+    const response = await apiClient.get(`/pagos/inscripcion/${codigoInscripcion}`);
     return response.data;
   },
 
   crear: async (pago: PagoDTO): Promise<PagoDTO> => {
-    const response = await apiClient.post("/Pagos", pago);
+    const response = await apiClient.post("/pagos", pago);
     return response.data;
   },
 
@@ -43,13 +43,14 @@ export const pagosApi = {
     metodoPago: string
   ): Promise<PagoDTO> => {
     const response = await apiClient.put(
-      `/Pagos/${codigo}/estado?estadoPago=${estadoPago}&metodoPago=${metodoPago}`
+      `/pagos/${codigo}/estado`,
+      { estadoPago, metodoPago }
     );
     return response.data;
   },
 
   desactivar: async (codigo: string): Promise<string> => {
-    const response = await apiClient.delete(`/Pagos/${codigo}`);
+    const response = await apiClient.delete(`/pagos/${codigo}`);
     return response.data;
   },
 };

@@ -9,6 +9,7 @@ import {
   obtenerTutorPorId,
   actualizarTutor
 } from "../services/tutorService";
+import toast from "react-hot-toast";
 
 import "../styles/FormEstudiante.css";
 
@@ -32,13 +33,16 @@ function EditarTutor() {
     setParentesco] =
     useState("");
 
+  const [cargando, setCargando] = useState(false);
+  const [guardando, setGuardando] = useState(false);
+
   useEffect(() => {
     cargarTutor();
   }, []);
 
   const cargarTutor =
     async () => {
-
+      setCargando(true);
       try {
 
         const tutor =
@@ -63,9 +67,10 @@ function EditarTutor() {
         );
 
       } catch (error) {
-
         console.error(error);
-
+        toast.error("Error al cargar los datos del tutor");
+      } finally {
+        setCargando(false);
       }
     };
 
@@ -73,9 +78,14 @@ function EditarTutor() {
     async (
       e: React.FormEvent
     ) => {
-
       e.preventDefault();
 
+      if (!nombre.trim() || !apellido.trim()) {
+        toast.error("Nombre y apellido son requeridos");
+        return;
+      }
+
+      setGuardando(true);
       try {
 
         await actualizarTutor(
@@ -88,14 +98,18 @@ function EditarTutor() {
           }
         );
 
+        toast.success("Tutor actualizado correctamente");
         navigate("/tutores");
 
       } catch (error) {
-
         console.error(error);
-
+        toast.error("Error al actualizar el tutor");
+      } finally {
+        setGuardando(false);
       }
     };
+
+  if (cargando) return <div className="form-container"><h1>Cargando...</h1></div>;
 
   return (
     <div className="form-container">
@@ -123,6 +137,7 @@ function EditarTutor() {
                   e.target.value
                 )
               }
+              required
             />
 
           </div>
@@ -140,6 +155,7 @@ function EditarTutor() {
                   e.target.value
                 )
               }
+              required
             />
 
           </div>
@@ -188,6 +204,8 @@ function EditarTutor() {
                   "/tutores"
                 )
               }
+              aria-label="Cancelar y volver"
+              disabled={guardando}
             >
               Cancelar
             </button>
@@ -195,8 +213,9 @@ function EditarTutor() {
             <button
               type="submit"
               className="btn-guardar"
+              disabled={guardando}
             >
-              Guardar
+              {guardando ? "Guardando..." : "Guardar"}
             </button>
 
           </div>

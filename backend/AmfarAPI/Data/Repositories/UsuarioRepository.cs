@@ -15,6 +15,7 @@ public class UsuarioRepository
     public async Task<IEnumerable<Usuario>> GetAllAsync()
     {
         return await _context.Usuarios
+            .Where(u => u.Estado == "Activo")
             .Include(u => u.Persona)
             .ToListAsync();
     }
@@ -23,14 +24,14 @@ public class UsuarioRepository
     {
         return await _context.Usuarios
             .Include(u => u.Persona)
-            .FirstOrDefaultAsync(u => u.IdUsuario == id);
+            .FirstOrDefaultAsync(u => u.IdUsuario == id && u.Estado == "Activo");
     }
 
     public async Task<Usuario?> GetByEmailAsync(string email)
     {
         return await _context.Usuarios
             .Include(u => u.Persona)
-            .FirstOrDefaultAsync(u => u.Email == email);
+            .FirstOrDefaultAsync(u => u.Email == email && u.Estado == "Activo");
     }
 
     public async Task AddAsync(Usuario usuario)
@@ -53,7 +54,7 @@ public class UsuarioRepository
 
         if (usuario != null)
         {
-            _context.Usuarios.Remove(usuario);
+            usuario.Estado = "Inactivo";
 
             await _context.SaveChangesAsync();
         }

@@ -12,6 +12,7 @@ public interface IEstudianteService
 
     Task UpdateAsync(int id, UpdateEstudianteDto dto);
 
+    Task DeleteAsync(int id);
 
     Task AsignarTutorAsync(
         int idEstudiante,

@@ -1,11 +1,13 @@
 using AmfarAPI.DTOs.Persona;
 using AmfarAPI.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmfarAPI.Controllers;
 
 [ApiController]
 [Route("api/personas")]
+[Authorize]
 public class PersonaController : ControllerBase
 {
     private readonly IPersonaService _service;
@@ -29,33 +31,30 @@ public class PersonaController : ControllerBase
         var persona = await _service.GetByIdAsync(id);
 
         if (persona == null)
-            return NotFound();
+            return NotFound(new { mensaje = "Persona no encontrada" });
 
         return Ok(persona);
     }
 
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
     [HttpPost]
     public async Task<IActionResult> Create(CreatePersonaDto dto)
     {
         await _service.CreateAsync(dto);
 
-        return Ok(new
-        {
-            mensaje = "Persona creada correctamente"
-        });
+        return Ok(new { mensaje = "Persona creada correctamente" });
     }
 
+    [Authorize(Roles = "Administrador,Directora,Secretaria")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UpdatePersonaDto dto)
     {
         await _service.UpdateAsync(id, dto);
 
-        return Ok(new
-        {
-            mensaje = "Persona actualizada correctamente"
-        });
+        return Ok(new { mensaje = "Persona actualizada correctamente" });
     }
 
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -64,9 +63,6 @@ public class PersonaController : ControllerBase
         if (!eliminado)
             return NotFound(new { mensaje = "Persona no encontrada" });
 
-        return Ok(new
-        {
-            mensaje = "Persona eliminada correctamente"
-        });
+        return Ok(new { mensaje = "Persona eliminada correctamente" });
     }
 }

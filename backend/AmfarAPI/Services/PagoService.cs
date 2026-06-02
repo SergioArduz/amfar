@@ -4,7 +4,7 @@ using AmfarAPI.Models;
 
 namespace AmfarAPI.Services
 {
-    public class PagoService
+    public class PagoService : IPagoService
     {
         private readonly IPagoRepository _pagoRepository;
 

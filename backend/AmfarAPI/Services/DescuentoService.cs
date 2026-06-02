@@ -4,7 +4,7 @@ using AmfarAPI.Models;
 
 namespace AmfarAPI.Services
 {
-    public class DescuentoService
+    public class DescuentoService : IDescuentoService
     {
         private readonly IDescuentoRepository _descuentoRepository;
 
@@ -39,7 +39,7 @@ namespace AmfarAPI.Services
             }).ToList();
         }
 
-        public async Task<DescuentoDTO> ObtenerPorCodigo(string codigo)
+        public async Task<DescuentoDTO?> ObtenerPorCodigo(string codigo)
         {
             var descuento = await _descuentoRepository.ObtenerPorCodigo(codigo);
 
@@ -77,7 +77,7 @@ namespace AmfarAPI.Services
             };
         }
 
-        public async Task<DescuentoDTO> Actualizar(string codigo, DescuentoDTO dto)
+        public async Task<DescuentoDTO?> Actualizar(string codigo, DescuentoDTO dto)
         {
             var descuento = await _descuentoRepository.ObtenerPorCodigo(codigo);
 

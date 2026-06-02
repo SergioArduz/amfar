@@ -1,5 +1,13 @@
 import api from "./api";
 
+export interface CrearEstudianteRequest {
+    nombre: string;
+    apellido: string;
+    telefono: string;
+    tieneInstrumento: boolean;
+    idsTutores: number[];
+}
+
 export const obtenerEstudiantes = async () => {
     const response =
         await api.get("/Estudiante");
@@ -17,7 +25,7 @@ export const obtenerEstudiantePorId = async (
 };
 
 export const crearEstudiante = async (
-    estudiante: any
+    estudiante: CrearEstudianteRequest
 ) => {
     const response =
         await api.post(
@@ -30,13 +38,22 @@ export const crearEstudiante = async (
 
 export const actualizarEstudiante = async (
     id: number,
-    estudiante: any
+    estudiante: CrearEstudianteRequest
 ) => {
     const response =
         await api.put(
             `/Estudiante/${id}`,
             estudiante
         );
+
+    return response.data;
+};
+
+export const eliminarEstudiante = async (
+    id: number
+) => {
+    const response =
+        await api.delete(`/Estudiante/${id}`);
 
     return response.data;
 };
