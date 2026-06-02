@@ -37,6 +37,8 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
     clases: [],
   });
 
+  const DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
   const [claseNueva, setClaseNueva] = useState<ClaseInscripcionDTO>({
     codigoProfesor: "",
     codigoInstrumento: "",
@@ -45,6 +47,8 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
     horaInicio: "08:00",
     horaFin: "09:00",
   });
+
+  const [diasSeleccionados, setDiasSeleccionados] = useState<string[]>([]);
 
   useEffect(() => {
     const cargarTodo = async () => {
@@ -87,18 +91,25 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
     }));
   };
 
+  const toggleDia = (dia: string) => {
+    setDiasSeleccionados(prev => prev.includes(dia) ? prev.filter(d => d !== dia) : [...prev, dia]);
+  };
+
+  const seleccionarPatron = (dias: string[]) => {
+    setDiasSeleccionados(dias);
+  };
+
   const agregarClase = () => {
     if (!claseNueva.codigoProfesor) {
       toast.error("Selecciona un profesor para la clase");
       return;
     }
-    
+    const dias = diasSeleccionados.length > 0 ? diasSeleccionados : [claseNueva.diaSemana];
     setForm(prev => ({
       ...prev,
-      clases: [...prev.clases, { ...claseNueva }]
+      clases: [...prev.clases, ...dias.map(dia => ({ ...claseNueva, diaSemana: dia }))]
     }));
-    
-    toast.success("Clase agregada al itinerario");
+    toast.success(`${dias.length} clase${dias.length > 1 ? 's' : ''} agregada${dias.length > 1 ? 's' : ''} al itinerario`);
   };
 
   const quitarClase = (index: number) => {
@@ -267,7 +278,7 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
             <Plus size={18} className="text-amfar-gold" /> Programación de Clases
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4">
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-gray-400 uppercase">Profesor</label>
             <select
@@ -298,18 +309,26 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
             </select>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-[10px] font-bold text-gray-400 uppercase">Día</label>
-            <select
-              name="diaSemana"
-              value={claseNueva.diaSemana}
-              onChange={manejarClaseNueva}
-              className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-amfar-gold"
-            >
-              {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"].map(d => (
-                <option key={d} value={d}>{d}</option>
+          <div className="md:col-span-2 space-y-1">
+            <label className="text-[10px] font-bold text-gray-400 uppercase">Días *</label>
+            <div className="flex flex-wrap gap-1">
+              {DIAS_SEMANA.map(d => (
+                <button key={d} type="button" onClick={() => toggleDia(d)}
+                  className={`px-2.5 py-1 rounded-md text-[10px] font-bold border transition-all ${
+                    diasSeleccionados.includes(d) ? 'bg-amfar-gold text-white border-amfar-gold' : 'bg-white text-gray-600 border-gray-200 hover:border-amfar-gold'
+                  }`}>
+                  {d.slice(0, 3)}
+                </button>
               ))}
-            </select>
+            </div>
+            <div className="flex gap-1 mt-1">
+              <button type="button" onClick={() => seleccionarPatron(["Lunes", "Miércoles", "Viernes"])}
+                className="text-[9px] px-2 py-0.5 rounded bg-gray-100 text-gray-500 hover:bg-gray-200 font-medium">Lun-Mie-Vie</button>
+              <button type="button" onClick={() => seleccionarPatron(["Martes", "Jueves", "Sábado"])}
+                className="text-[9px] px-2 py-0.5 rounded bg-gray-100 text-gray-500 hover:bg-gray-200 font-medium">Mar-Jue-Sab</button>
+              <button type="button" onClick={() => seleccionarPatron(["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"])}
+                className="text-[9px] px-2 py-0.5 rounded bg-gray-100 text-gray-500 hover:bg-gray-200 font-medium">Lun-Vie</button>
+            </div>
           </div>
 
           <div className="space-y-1">
