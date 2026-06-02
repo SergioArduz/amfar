@@ -11,7 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   GraduationCap,
-  Package
+  Package,
+  Shield
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { clsx, type ClassValue } from "clsx";
@@ -31,6 +32,7 @@ const menuItems = [
   { icon: GraduationCap, label: "Profesores", path: "/profesores" },
   { icon: Package, label: "Instrumentos", path: "/instrumentos" },
   { icon: Music, label: "Planes", path: "/planes" },
+  { icon: Shield, label: "Usuarios", path: "/usuarios" },
 ];
 
 export function Sidebar() {

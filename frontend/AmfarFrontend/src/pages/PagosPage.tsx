@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-
 import { pagosApi } from "../api/pagosApi";
 import type { PagoDTO } from "../api/pagosApi";
-import { DollarSign } from "lucide-react";
+import { recibosApi } from "../api/recibosApi";
+import type { ReciboDTO } from "../api/recibosApi";
+import { DollarSign, FileText, X, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 import PagosList from "../components/pagos/PagosList";
@@ -14,6 +15,8 @@ function PagosPage() {
   const [pagoSeleccionado, setPagoSeleccionado] = useState<PagoDTO | null>(null);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
+  const [reciboModal, setReciboModal] = useState<ReciboDTO | null>(null);
+  const [generandoRecibo, setGenerandoRecibo] = useState(false);
 
   const cargarPagos = async () => {
     setCargando(true);
@@ -29,9 +32,7 @@ function PagosPage() {
     }
   };
 
-  useEffect(() => {
-    cargarPagos();
-  }, []);
+  useEffect(() => { cargarPagos(); }, []);
 
   const guardarPago = async (pago: PagoDTO) => {
     try {
@@ -44,11 +45,7 @@ function PagosPage() {
     }
   };
 
-  const actualizarEstado = async (
-    codigo: string,
-    estadoPago: string,
-    metodoPago: string
-  ) => {
+  const actualizarEstado = async (codigo: string, estadoPago: string, metodoPago: string) => {
     try {
       await pagosApi.actualizarEstado(codigo, estadoPago, metodoPago);
       setPagoSeleccionado(null);
@@ -69,6 +66,33 @@ function PagosPage() {
     } catch (error) {
       console.error(error);
       toast.error("Error al eliminar el pago");
+    }
+  };
+
+  const generarRecibo = async (codigoPago: string) => {
+    setGenerandoRecibo(true);
+    try {
+      const recibo = await recibosApi.generar(codigoPago);
+      setReciboModal(recibo);
+      toast.success("Recibo generado correctamente");
+    } catch (error: any) {
+      const msg = error?.response?.data?.mensaje || "No se pudo generar el recibo";
+      toast.error(msg);
+    } finally {
+      setGenerandoRecibo(false);
+    }
+  };
+
+  const handleVerRecibo = async (pago: PagoDTO) => {
+    if (pago.estadoPago !== "Pagado") {
+      toast.error("Solo se pueden generar recibos para pagos en estado 'Pagado'");
+      return;
+    }
+    const existentes = await recibosApi.obtenerPorPago(pago.codigo);
+    if (existentes.length > 0) {
+      setReciboModal(existentes[0]);
+    } else {
+      await generarRecibo(pago.codigo);
     }
   };
 
@@ -124,8 +148,69 @@ function PagosPage() {
           pagos={pagos}
           onCambiarEstado={setPagoSeleccionado}
           onEliminar={eliminarPago}
+          onGenerarRecibo={handleVerRecibo}
+          generandoRecibo={generandoRecibo}
         />
       </div>
+
+      {reciboModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setReciboModal(null)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setReciboModal(null)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+              <X size={20} />
+            </button>
+
+            <div className="flex items-center gap-3 mb-6">
+              <div className="bg-green-100 p-3 rounded-xl">
+                <FileText size={24} className="text-green-600" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-amfar-black">Recibo Generado</h2>
+                <p className="text-sm text-gray-500">{reciboModal.numeroRecibo}</p>
+              </div>
+            </div>
+
+            <div className="space-y-3 bg-gray-50 rounded-xl p-4">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">N° Recibo</span>
+                <span className="font-bold text-amfar-black font-mono">{reciboModal.numeroRecibo}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Código Pago</span>
+                <span className="font-semibold">{reciboModal.codigoPago}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Alumno</span>
+                <span className="font-semibold">{reciboModal.datosAlumno}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Plan</span>
+                <span className="font-semibold">{reciboModal.nombrePlan}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Período</span>
+                <span className="font-semibold">{reciboModal.periodo}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Fecha Emisión</span>
+                <span className="font-semibold">{new Date(reciboModal.fechaEmision).toLocaleString()}</span>
+              </div>
+              <div className="border-t border-gray-200 pt-3 flex justify-between text-sm">
+                <span className="text-gray-700 font-semibold">Monto</span>
+                <span className="text-lg font-bold text-amfar-gold">Bs. {reciboModal.monto}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Emitido por</span>
+                <span className="font-semibold">{reciboModal.emitidoPor}</span>
+              </div>
+            </div>
+
+            <button onClick={() => window.print()} className="mt-6 w-full py-3 bg-amfar-gold hover:bg-yellow-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-amfar-gold/20">
+              Imprimir Recibo
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

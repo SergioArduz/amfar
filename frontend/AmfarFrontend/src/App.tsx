@@ -23,6 +23,7 @@ import Dashboard from "./pages/Dashboard";
 import Calendario from "./pages/Calendario";
 import InstrumentosPage from "./pages/InstrumentosPage";
 import ProfesoresPage from "./pages/ProfesoresPage";
+import UsuariosPage from "./pages/UsuariosPage";
 import { Layout } from "./components/Layout";
 
 // Wrapper para manejar el Layout solo en rutas protegidas
@@ -155,6 +156,15 @@ function AppContent() {
                     element={
                         <PrivateRoute>
                             <PagosPage />
+                        </PrivateRoute>
+                    }
+                />
+
+                <Route
+                    path="/usuarios"
+                    element={
+                        <PrivateRoute>
+                            <UsuariosPage />
                         </PrivateRoute>
                     }
                 />

@@ -1,10 +1,12 @@
-import { Edit2, Trash2, DollarSign } from "lucide-react";
+import { Edit2, Trash2, DollarSign, FileText, Loader2 } from "lucide-react";
 import type { PagoDTO } from "../../api/pagosApi";
 
 interface Props {
   pagos: PagoDTO[];
   onCambiarEstado: (pago: PagoDTO) => void;
   onEliminar: (codigo: string) => void;
+  onGenerarRecibo: (pago: PagoDTO) => void;
+  generandoRecibo?: boolean;
 }
 
 const estadoColores: Record<string, string> = {
@@ -14,7 +16,7 @@ const estadoColores: Record<string, string> = {
   Anulado: "bg-gray-100 text-gray-600",
 };
 
-function PagosList({ pagos, onCambiarEstado, onEliminar }: Props) {
+function PagosList({ pagos, onCambiarEstado, onEliminar, onGenerarRecibo, generandoRecibo }: Props) {
   if (pagos.length === 0) {
     return (
       <div className="flex flex-col items-center gap-2 py-8 text-gray-400">
@@ -55,7 +57,17 @@ function PagosList({ pagos, onCambiarEstado, onEliminar }: Props) {
               </span>
             </td>
             <td className="px-4 py-3 text-right">
-              <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                {pago.estadoPago === "Pagado" && (
+                  <button
+                    onClick={() => onGenerarRecibo(pago)}
+                    disabled={generandoRecibo}
+                    className="p-2 text-gray-400 hover:text-green-500 hover:bg-green-500/10 rounded-lg transition-all disabled:opacity-50"
+                    title="Generar recibo"
+                  >
+                    {generandoRecibo ? <Loader2 size={16} className="animate-spin" /> : <FileText size={16} />}
+                  </button>
+                )}
                 <button onClick={() => onCambiarEstado(pago)} className="p-2 text-gray-400 hover:text-amfar-gold hover:bg-amfar-gold/10 rounded-lg transition-all" title="Cambiar estado">
                   <Edit2 size={16} />
                 </button>
