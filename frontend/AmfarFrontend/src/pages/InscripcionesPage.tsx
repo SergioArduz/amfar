@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { inscripcionesApi } from "../api/inscripcionesApi";
 import { planesApi } from "../api/planesApi";
 import { descuentosApi } from "../api/descuentosApi";
+import { pagosApi } from "../api/pagosApi";
 
 import type { InscripcionDTO } from "../api/inscripcionesApi";
 import type { PlanDTO } from "../api/planesApi";
@@ -17,7 +18,7 @@ function InscripcionesPage() {
 
   const cargarDatos = async () => {
     try {
-      const inscripcionesData = await inscripcionesApi.obtenerTodas();
+      const inscripcionesData = await inscripcionesApi.obtenerActivas();
       const planesData = await planesApi.obtenerActivos();
       const descuentosData = await descuentosApi.obtenerActivos();
 
@@ -34,20 +35,46 @@ function InscripcionesPage() {
   }, []);
 
   const guardarInscripcion = async (inscripcion: InscripcionDTO) => {
-  try {
-    console.log("ENVIANDO:", inscripcion);
+    try {
+      await inscripcionesApi.crear(inscripcion);
 
-    await inscripcionesApi.crear(inscripcion);
-    await cargarDatos();
+      const plan = planes.find((p) => p.codigo === inscripcion.codigoPlan);
+      const descuento = descuentos.find(
+        (d) => d.codigo === inscripcion.codigoDescuento
+      );
 
-    alert("Inscripción guardada correctamente.");
-  } catch (error: any) {
-    console.error("ERROR COMPLETO:", error);
-    console.error("ERROR BACKEND:", error.response?.data);
+      const montoPlan = plan ? plan.monto : 0;
+      const porcentajeDescuento = descuento ? descuento.porcentaje : 0;
+      const montoFinal =
+        montoPlan - (montoPlan * porcentajeDescuento) / 100;
 
-    alert(JSON.stringify(error.response?.data, null, 2));
-  }
-};
+      const fechaVencimiento = new Date();
+      fechaVencimiento.setMonth(fechaVencimiento.getMonth() + 1);
+
+      await pagosApi.crear({
+        codigo: `PAGO-${inscripcion.codigo}`,
+        codigoInscripcion: inscripcion.codigo,
+        fechaVencimiento: fechaVencimiento.toISOString(),
+        fechaPago: null,
+        monto: montoFinal,
+        metodoPago: "",
+        estadoPago: "Pendiente",
+      });
+
+      await cargarDatos();
+
+      alert("Inscripción guardada y pago generado automáticamente.");
+    } catch (error: any) {
+      console.error("ERROR AL GUARDAR INSCRIPCIÓN O PAGO:", error);
+      console.error("RESPUESTA BACKEND:", error.response?.data);
+
+      alert(
+        JSON.stringify(error.response?.data, null, 2) ||
+          "No se pudo guardar la inscripción o generar el pago."
+      );
+    }
+  };
+
   const eliminarInscripcion = async (codigo: string) => {
     try {
       await inscripcionesApi.desactivar(codigo);
@@ -98,7 +125,7 @@ function InscripcionesPage() {
                   <td>{inscripcion.codigoPlan}</td>
                   <td>{inscripcion.codigoDescuento || "Sin descuento"}</td>
                   <td>{inscripcion.modalidad}</td>
-                  <td>{inscripcion.fechaInicio}</td>
+                  <td>{new Date(inscripcion.fechaInicio).toLocaleDateString()}</td>
                   <td>
                     {inscripcion.clases.map((clase, index) => (
                       <div key={index}>

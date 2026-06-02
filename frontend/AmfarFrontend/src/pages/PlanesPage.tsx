@@ -18,9 +18,8 @@ function PlanesPage() {
   const [descuentoEditar, setDescuentoEditar] = useState<DescuentoDTO | null>(null);
 
   const cargarDatos = async () => {
-    const planesData = await planesApi.obtenerTodos();
-    const descuentosData = await descuentosApi.obtenerTodos();
-
+    const planesData = await planesApi.obtenerActivos();
+    const descuentosData = await descuentosApi.obtenerActivos();
     setPlanes(planesData);
     setDescuentos(descuentosData);
   };

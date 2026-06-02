@@ -33,6 +33,19 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
     horaFin: "",
   });
 
+  const planSeleccionado = planes.find((p) => p.codigo === form.codigoPlan);
+  const descuentoSeleccionado = descuentos.find(
+    (d) => d.codigo === form.codigoDescuento
+  );
+
+  const montoPlan = planSeleccionado ? planSeleccionado.monto : 0;
+  const porcentajeDescuento = descuentoSeleccionado
+    ? descuentoSeleccionado.porcentaje
+    : 0;
+
+  const montoDescuento = (montoPlan * porcentajeDescuento) / 100;
+  const montoFinal = montoPlan - montoDescuento;
+
   const manejarCambio = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -105,8 +118,6 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
       clases: [claseEnviar],
     };
 
-    console.log("INSCRIPCIÓN ENVIADA:", inscripcionEnviar);
-
     onGuardar(inscripcionEnviar);
   };
 
@@ -158,19 +169,25 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
         </select>
 
         <select
-        name="codigoPlan"
-        value={form.codigoPlan}
-        onChange={manejarCambio}
-        required
-      >
-        {planes
-  .filter((plan) => plan.codigo && plan.codigo.trim() !== "")
-  .map((plan) => (
-    <option key={plan.codigo} value={plan.codigo}>
-      {plan.nombrePlan} - Bs. {plan.monto}
-    </option>
-  ))}
-      </select>
+          name="codigoPlan"
+          value={form.codigoPlan || ""}
+          onChange={(e) => {
+            setForm((prev) => ({
+              ...prev,
+              codigoPlan: e.target.value,
+            }));
+          }}
+          required
+        >
+          <option value="">Seleccione plan</option>
+          {planes
+            .filter((plan) => plan.codigo && plan.codigo.trim() !== "")
+            .map((plan) => (
+              <option key={plan.codigo} value={plan.codigo}>
+                {plan.nombrePlan} - Bs. {plan.monto}
+              </option>
+            ))}
+        </select>
 
         <select
           name="codigoDescuento"
@@ -184,6 +201,26 @@ function InscripcionForm({ planes, descuentos, onGuardar }: Props) {
             </option>
           ))}
         </select>
+      </div>
+
+      <br />
+
+      <div className="card" style={{ background: "#fff8e5" }}>
+        <h3>Resumen de monto</h3>
+        <p>
+          <strong>Plan:</strong>{" "}
+          {planSeleccionado ? planSeleccionado.nombrePlan : "No seleccionado"}
+        </p>
+        <p>
+          <strong>Monto del plan:</strong> Bs. {montoPlan}
+        </p>
+        <p>
+          <strong>Descuento:</strong> {porcentajeDescuento}%
+        </p>
+        <p>
+          <strong>Monto descontado:</strong> Bs. {montoDescuento}
+        </p>
+        <h3>Monto final: Bs. {montoFinal}</h3>
       </div>
 
       <br />
